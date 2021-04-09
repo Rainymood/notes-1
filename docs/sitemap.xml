@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://chrisalbon.com/</loc>
+    <lastmod>2018-03-12T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/columns_shared_by_two_data_frames/</loc>
+    <lastmod>2018-03-12T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/index.xml</loc>
+    <lastmod>2018-03-12T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_apply_function_by_group/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_apply_operations_to_groups/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_apply_operations_to_dataframes/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_assign_new_column_dataframe/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_back_to_back_bar_plot/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_bar_plot/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/break_list_into_chunks_of_equal_size/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_regex_to_create_columns/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/seaborn_color_palettes/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/construct_a_dictionary_from_multiple_lists/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_convert_categorical_to_dummies/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_convert_numeric_categorical_to_numeric_with_patsy/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/csv_to_python_code/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/convert_categorical_to_numeric/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_convert_to_datetime/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dataframe_count_values/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_create_column_using_conditional/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_create_column_with_loop/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_create_pipeline/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/creating_counts_of_items/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/seaborn_pandas_timeseries_plot/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/create_list_from_dictionary_keys_and_values/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/seaborn_scatterplot/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_crosstabs/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_delete_duplicates/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dataframe_descriptive_stats/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dropping_column_and_rows/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/enumerate_a_list/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_expand_cells_containing_lists/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/filter_dataframes/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_find_largest_value_in_column/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_find_unique_values/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/geocoding_and_reverse_geocoding/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/geolocate_a_city_and_country/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/geolocate_a_city_or_country/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_group_by_time/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_grouped_bar_plot/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_group_data_by_time/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/group_pandas_data_by_hour_of_the_day/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_group_rows_by/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_hierarchical_data/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_histogram/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_join_merge_dataframe/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_list_unique_values_in_column/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/load_json_file_into_pandas/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/load_excel_file_into_pandas/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dataframe_load_xls/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dataframe_importing_csv/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_long_to_wide/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_lowercase_column_names/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_make_new_columns_using_functions/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_scatterplot_from_pandas/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_map_values_to_values/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_simple_example/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_missing_data/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_moving_average/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_normalize_column/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_data_structures/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_time_series_basics/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_pie_chart/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_pivot_tables/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_change_column_of_strings/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_sampling_dataframe/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dataframe_ranking_rows/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/regular_expressions_basics/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/regex_by_example/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dataframe_reindexing/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_rename_column_headers/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_rename_multiple_columns/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_replace_values/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_saving_dataframe_as_csv/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_simple_scatterplot/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_search_column_for_value/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_select_rows_when_column_has_certain_values/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_select_rows_containing_values/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_select_rows_multiple_filters/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_selecting_rows_on_conditions/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_dataframe_examples/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_sorting_rows_dataframe/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_split_lat_and_long_into_variables/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_visualization/matplotlib_percentage_stacked_bar_plot/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/streaming_data_pipeline/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_string_munging/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_list_comprehension/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrisalbon.com/python/data_wrangling/pandas_with_seaborn/</loc>
+    <lastmod>2017-12-20T11:53:49-07:00</lastmod>
+  </url>
+  
+</urlset>
