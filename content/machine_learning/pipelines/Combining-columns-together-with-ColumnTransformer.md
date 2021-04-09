@@ -6,8 +6,6 @@ description: "Combining columns together with ColumnTransformer"
 type: technical_note
 draft: false
 ---
-# Combining columns together with ColumnTransformer
-
 From: 
 * Hands on Machine learning
 

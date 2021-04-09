@@ -6,8 +6,6 @@ description: "Selecting numerical columns with ColumnSelector"
 type: technical_note
 draft: false
 ---
-# Selecting columns with a custom transformer (ColumnSelector)
-
 From: 
 * https://towardsdatascience.com/pipeline-columntransformer-and-featureunion-explained-f5491f815f
 

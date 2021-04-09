@@ -6,8 +6,6 @@ description: "Selecting non-numerical columns with ColumnSelector"
 type: technical_note
 draft: false
 ---
-# Selecting non-numerical columns with ColumnSelector
-
 From: 
 * https://towardsdatascience.com/pipeline-columntransformer-and-featureunion-explained-f5491f815f
 

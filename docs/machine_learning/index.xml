@@ -16,7 +16,7 @@
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/combining-columns-together-with-columntransformer/</guid>
-      <description>Combining columns together with ColumnTransformer From:
+      <description>From:
  Hands on Machine learning  Imports import pandas as pd import numpy as np from sklearn.base import BaseEstimator, TransformerMixin from sklearn.pipeline import Pipeline from sklearn.compose import ColumnTransformer Create data data = {&amp;#39;label&amp;#39;: [&amp;#39;dog&amp;#39;, &amp;#39;cat&amp;#39;, &amp;#39;catdog&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;catdog&amp;#39;], &amp;#39;score&amp;#39;: [1, 2, 3, 4, 5]} df = pd.DataFrame(data, columns = [&amp;#34;label&amp;#34;, &amp;#34;score&amp;#34;]) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .</description>
     </item>
     
@@ -99,7 +99,7 @@ boston = datasets.load_boston() # Load features X = boston.data # Load data y = 
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting-non-numerical-columns-with-columnselector/</guid>
-      <description>Selecting non-numerical columns with ColumnSelector From:
+      <description>From:
  https://towardsdatascience.com/pipeline-columntransformer-and-featureunion-explained-f5491f815f  Imports import pandas as pd import numpy as np from sklearn.base import BaseEstimator, TransformerMixin from sklearn.pipeline import Pipeline Create data data = {&amp;#39;label&amp;#39;: [&amp;#39;dog&amp;#39;, &amp;#39;cat&amp;#39;, &amp;#39;catdog&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;catdog&amp;#39;], &amp;#39;score&amp;#39;: [1, 2, 3, 4, 5]} df = pd.DataFrame(data, columns = [&amp;#34;label&amp;#34;, &amp;#34;score&amp;#34;]) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }</description>
     </item>
     
@@ -109,8 +109,8 @@ boston = datasets.load_boston() # Load features X = boston.data # Load data y = 
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting_numerical_columns_with_custom_transformer/</guid>
-      <description>Selecting columns with a custom transformer (ColumnSelector) From:
- https://towardsdatascience.com/pipeline-columntransformer-and-featureunion-explained-f5491f815f  Imports import pandas as pd import numpy as np from sklearn.base import BaseEstimator, TransformerMixin from sklearn.pipeline import Pipeline Create data data = {&amp;#39;label&amp;#39;: [&amp;#39;dog&amp;#39;, &amp;#39;cat&amp;#39;, &amp;#39;catdog&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;catdog&amp;#39;], &amp;#39;score&amp;#39;: [1, 2, 3, 4, 5]} df = pd.DataFrame(data, columns = [&amp;#34;label&amp;#34;, &amp;#34;score&amp;#34;]) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .</description>
+      <description>From:
+ https://towardsdatascience.com/pipeline-columntransformer-and-featureunion-explained-f5491f815f  Imports import pandas as pd import numpy as np from sklearn.base import BaseEstimator, TransformerMixin from sklearn.pipeline import Pipeline Create data data = {&amp;#39;label&amp;#39;: [&amp;#39;dog&amp;#39;, &amp;#39;cat&amp;#39;, &amp;#39;catdog&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;catdog&amp;#39;], &amp;#39;score&amp;#39;: [1, 2, 3, 4, 5]} df = pd.DataFrame(data, columns = [&amp;#34;label&amp;#34;, &amp;#34;score&amp;#34;]) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }</description>
     </item>
     
   </channel>
