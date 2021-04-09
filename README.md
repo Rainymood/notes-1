@@ -1,6 +1,25 @@
-# notes
+# Notes
 
-This is Chris Albon's collection of personal notes on coding, statistics, machine learning, and technical management. These notes are posted publically at https://ChrisAlbon.com. What is in this repo will not be useful to other folks.
+This is Jan Meppe's collection of personal notes on coding, statistics, machine learning, and more. 
+
+Shamelessly copied from [Chris Albon](https://chrisalbon.com/) because I believe that [knowledge work should accrete](https://notes.andymatuschak.org/Knowledge_work_should_accrete).
+
+## Add front-matter manually
+
+Note that you **must add a `yaml` like frontmatter** to your post otherwise it doesn't show up.
+
+For example
+
+```
+---
+title: "Create simulated data for clustering"
+author: "Jan Meppe"
+date: 2021-04-09
+description: "Create simulated data for clustering"
+type: technical_note
+draft: false
+---
+```
 
 ## Overview
 
@@ -8,7 +27,7 @@ The master record of a note is either a Jupyter Notebook or a Markdown file. The
 
 ## Full Deploy Procedure
 
-1. Run `make.ipynb` to convert the Jupyter Notebooks and associated images into Markdown files.
+1. Run `python make.py` to convert the Jupyter Notebooks and associated images into Markdown files.
 2. Run `hugo` to convert the Markdown files into HTML pages.
 3. Run `git add -A` 
 4. Run `git commit -m "commit message"`
@@ -51,6 +70,6 @@ Note that when you run `nnn` you might be prompted for an application password. 
 
 ## To Do
 
-- Fix Github issues
-- Hunt for minor errors
-- Refactor make.ipynb to make it .py and cleaner
+- Make `make.py` faster 
+- Change links in header/footer etc
+- Change google analytics

@@ -4,22 +4,16 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>
-                    <span class="minor_line">Notes On Using</span>
+                    <span class="minor_line">Jan Meppe's notes on</span>
                     <br>
                     <span class="major_line">Data Science &amp; Machine Learning</span>
                     <br>
-                    <span class="minor_line">To Fight For Something That Matters</span>
                 </h1>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 blurb">
-                <p>
-                    <a href="about/chris_albon/">I am the Director of Machine Learning</a> at the <a href="https://wikimediafoundation.org/">Wikimedia Foundation</a>. I have spent over a decade applying statistical learning, artificial intelligence, and software engineering to political, social, and humanitarian
-                    efforts.</p>
-
-                <p>Learning machine learning? Check out my
-                    <a href="https://machinelearningflashcards.com">Machine Learning Flashcards</a>, my book (<a href="https://amzn.to/2HwnWty">Machine Learning With Python Cookbook</a>), or come <a href="https://www.youtube.com/channel/UCnd4Fi-ODvuPbxR2fO2j7kA">study with me</a>.</p> 
+                <p>These are my data science and machine learning snippets. Big shoutout to Chris Albon.</p>
             </div>
         </div>
 
@@ -1345,60 +1339,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row" id="php">
-            <div class="col-sm-12">
-                <h3 class="category_header">PHP</h3>
-            </div>
-        </div>
-    
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <ul>
-                            {{ $pages := .Pages }}
-                            {{ if .IsHome }}
-                                {{ $pages = .Site.RegularPages }}
-                            {{ end }}
-                            {{ range (where $pages "File.Dir" "in" "/php/") }}
-                            <li>
-                                <a href="{{.Permalink}}">{{.Title}}</a>
-                            </li>
-                            {{ end }}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" id="research">
-            <div class="col-sm-12">
-                <h3 class="category_header">Research Notes</h3>
-            </div>
-        </div>
-    
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <h4 class="card-header">AI Ethics</h4>
-                    <div class="card-body">
-                        <ul>
-                            {{ $pages := .Pages }}
-                            {{ if .IsHome }}
-                                {{ $pages = .Site.RegularPages }}
-                            {{ end }}
-                            {{ range (where $pages "File.Dir" "in" "/research/ai_ethics/") }}
-                            <li>
-                                <a href="{{.Permalink}}">{{.Title}}</a>
-                            </li>
-                            {{ end }}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <div class="row" id="articles">
             <div class="col-sm-12">
