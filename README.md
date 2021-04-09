@@ -21,6 +21,10 @@ draft: false
 ---
 ```
 
+## How the website works
+
+* The order of the pages is hardcoded in `themes/berbera/layouts/index.html`
+
 ## Overview
 
 The master record of a note is either a Jupyter Notebook or a Markdown file. These files are in the `content` folder. The website HTML is contained in the `docs` folder.
