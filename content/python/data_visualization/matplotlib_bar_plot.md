@@ -130,5 +130,7 @@ plt.show()
 ```
 
 
+    
 ![png](matplotlib_bar_plot_6_0.png)
+    
 

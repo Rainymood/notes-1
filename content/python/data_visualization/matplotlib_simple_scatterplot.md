@@ -285,5 +285,7 @@ plt.show()
 ```
 
 
+    
 ![png](matplotlib_simple_scatterplot_6_0.png)
+    
 

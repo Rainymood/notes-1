@@ -40,7 +40,9 @@ sns.palplot(sns.color_palette("deep", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_5_0.png)
+    
 
 
 
@@ -49,7 +51,9 @@ sns.palplot(sns.color_palette("muted", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_6_0.png)
+    
 
 
 
@@ -58,7 +62,9 @@ sns.palplot(sns.color_palette("bright", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_7_0.png)
+    
 
 
 
@@ -67,7 +73,9 @@ sns.palplot(sns.color_palette("dark", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_8_0.png)
+    
 
 
 
@@ -76,7 +84,9 @@ sns.palplot(sns.color_palette("colorblind", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_9_0.png)
+    
 
 
 
@@ -85,7 +95,9 @@ sns.palplot(sns.color_palette("Paired", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_10_0.png)
+    
 
 
 
@@ -94,7 +106,9 @@ sns.palplot(sns.color_palette("BuGn", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_11_0.png)
+    
 
 
 
@@ -103,7 +117,9 @@ sns.palplot(sns.color_palette("GnBu", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_12_0.png)
+    
 
 
 
@@ -112,7 +128,9 @@ sns.palplot(sns.color_palette("OrRd", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_13_0.png)
+    
 
 
 
@@ -121,7 +139,9 @@ sns.palplot(sns.color_palette("PuBu", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_14_0.png)
+    
 
 
 
@@ -130,7 +150,9 @@ sns.palplot(sns.color_palette("YlGn", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_15_0.png)
+    
 
 
 
@@ -139,7 +161,9 @@ sns.palplot(sns.color_palette("YlGnBu", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_16_0.png)
+    
 
 
 
@@ -148,7 +172,9 @@ sns.palplot(sns.color_palette("YlOrBr", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_17_0.png)
+    
 
 
 
@@ -157,7 +183,9 @@ sns.palplot(sns.color_palette("YlOrRd", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_18_0.png)
+    
 
 
 
@@ -166,7 +194,9 @@ sns.palplot(sns.color_palette("BrBG", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_19_0.png)
+    
 
 
 
@@ -175,7 +205,9 @@ sns.palplot(sns.color_palette("PiYG", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_20_0.png)
+    
 
 
 
@@ -184,7 +216,9 @@ sns.palplot(sns.color_palette("PRGn", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_21_0.png)
+    
 
 
 
@@ -193,7 +227,9 @@ sns.palplot(sns.color_palette("PuOr", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_22_0.png)
+    
 
 
 
@@ -202,7 +238,9 @@ sns.palplot(sns.color_palette("RdBu", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_23_0.png)
+    
 
 
 
@@ -211,7 +249,9 @@ sns.palplot(sns.color_palette("RdGy", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_24_0.png)
+    
 
 
 
@@ -220,7 +260,9 @@ sns.palplot(sns.color_palette("RdYlBu", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_25_0.png)
+    
 
 
 
@@ -229,7 +271,9 @@ sns.palplot(sns.color_palette("RdYlGn", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_26_0.png)
+    
 
 
 
@@ -238,7 +282,9 @@ sns.palplot(sns.color_palette("Spectral", 10))
 ```
 
 
+    
 ![png](seaborn_color_palettes_27_0.png)
+    
 
 
 ## Create a color palette and set it as the current color palette
@@ -251,7 +297,9 @@ sns.palplot(sns.color_palette())
 ```
 
 
+    
 ![png](seaborn_color_palettes_29_0.png)
+    
 
 
 ## Set the color of a plot
@@ -270,5 +318,7 @@ sns.tsplot([df.deaths_regiment_1, df.deaths_regiment_2, df.deaths_regiment_3, df
 
 
 
+    
 ![png](seaborn_color_palettes_31_1.png)
+    
 

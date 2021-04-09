@@ -771,5 +771,7 @@ df.resample('D').sum().plot()
 
 
 
+    
 ![png](pandas_time_series_basics_29_1.png)
+    
 

@@ -127,7 +127,9 @@ plt.scatter(df.preTestScore, df.postTestScore
 
 
 
+    
 ![png](matplotlib_scatterplot_from_pandas_6_1.png)
+    
 
 
 ### Scatterplot of preTestScore and postTestScore with the size = 300 and the color determined by sex
@@ -145,5 +147,7 @@ plt.scatter(df.preTestScore, df.postTestScore, s=300, c=df.female)
 
 
 
+    
 ![png](matplotlib_scatterplot_from_pandas_8_1.png)
+    
 

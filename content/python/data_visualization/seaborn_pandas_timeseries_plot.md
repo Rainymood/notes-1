@@ -48,7 +48,9 @@ sns.tsplot([df.deaths_regiment_1, df.deaths_regiment_2, df.deaths_regiment_3, df
 
 
 
+    
 ![png](seaborn_pandas_timeseries_plot_5_1.png)
+    
 
 
 ## Time Series Splot With Confidence Interval Lines But No Lines
@@ -67,5 +69,7 @@ sns.tsplot([df.deaths_regiment_1, df.deaths_regiment_2, df.deaths_regiment_3, df
 
 
 
+    
 ![png](seaborn_pandas_timeseries_plot_7_1.png)
+    
 

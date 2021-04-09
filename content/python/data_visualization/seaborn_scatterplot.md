@@ -141,5 +141,7 @@ plt.ylabel('Deaths')
 
 
 
+    
 ![png](seaborn_scatterplot_7_1.png)
+    
 

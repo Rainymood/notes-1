@@ -35,5 +35,7 @@ pyplot.plot([1.6, 2.7])
 
 
 
+    
 ![png](matplotlib_simple_example_6_1.png)
+    
 
