@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/combining-columns-together-with-columntransformer/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.janmeppe.com/notes/computer_science/index.xml</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
@@ -54,6 +59,16 @@
   
   <url>
     <loc>https://www.janmeppe.com/notes/computer_science/algorithms/quicksort/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting-non-numerical-columns-with-columnselector/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting_numerical_columns_with_custom_transformer/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   

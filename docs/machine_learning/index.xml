@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>Combining columns together with ColumnTransformer</title>
+      <link>https://www.janmeppe.com/notes/machine_learning/pipelines/combining-columns-together-with-columntransformer/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/combining-columns-together-with-columntransformer/</guid>
+      <description>Combining columns together with ColumnTransformer From:
+ Hands on Machine learning  Imports import pandas as pd import numpy as np from sklearn.base import BaseEstimator, TransformerMixin from sklearn.pipeline import Pipeline from sklearn.compose import ColumnTransformer Create data data = {&amp;#39;label&amp;#39;: [&amp;#39;dog&amp;#39;, &amp;#39;cat&amp;#39;, &amp;#39;catdog&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;catdog&amp;#39;], &amp;#39;score&amp;#39;: [1, 2, 3, 4, 5]} df = pd.DataFrame(data, columns = [&amp;#34;label&amp;#34;, &amp;#34;score&amp;#34;]) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .</description>
+    </item>
+    
+    <item>
       <title>Create simulated data for clustering</title>
       <link>https://www.janmeppe.com/notes/machine_learning/basics/create_simulated_data_for_clustering_blobs/</link>
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
@@ -81,6 +91,26 @@ boston = datasets.load_boston() # Load features X = boston.data # Load data y = 
       <guid>https://www.janmeppe.com/notes/machine_learning/basics/loading_scikit_learn_digits_dataset/</guid>
       <description>Loading scikit-learn digits dataset from sklearn import datasets import matplotlib.pyplot as plt Load digits dataset The Digits dataset is a dataset of handwritten digits. Each feature is the intensity of a single pixel in an 8x8 image.
 # Load digits = datasets.load_digits() # View attributes dir(digits) [&#39;DESCR&#39;, &#39;data&#39;, &#39;images&#39;, &#39;target&#39;, &#39;target_names&#39;]  # Create features X = digits.data # Create target label y = digits.target Each of the futures are represented as a vector of length 64 instead of an 8x8 image.</description>
+    </item>
+    
+    <item>
+      <title>Selecting non-numerical columns with ColumnSelector</title>
+      <link>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting-non-numerical-columns-with-columnselector/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting-non-numerical-columns-with-columnselector/</guid>
+      <description>Selecting non-numerical columns with ColumnSelector From:
+ https://towardsdatascience.com/pipeline-columntransformer-and-featureunion-explained-f5491f815f  Imports import pandas as pd import numpy as np from sklearn.base import BaseEstimator, TransformerMixin from sklearn.pipeline import Pipeline Create data data = {&amp;#39;label&amp;#39;: [&amp;#39;dog&amp;#39;, &amp;#39;cat&amp;#39;, &amp;#39;catdog&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;catdog&amp;#39;], &amp;#39;score&amp;#39;: [1, 2, 3, 4, 5]} df = pd.DataFrame(data, columns = [&amp;#34;label&amp;#34;, &amp;#34;score&amp;#34;]) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }</description>
+    </item>
+    
+    <item>
+      <title>Selecting numerical columns with ColumnSelector</title>
+      <link>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting_numerical_columns_with_custom_transformer/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting_numerical_columns_with_custom_transformer/</guid>
+      <description>Selecting columns with a custom transformer (ColumnSelector) From:
+ https://towardsdatascience.com/pipeline-columntransformer-and-featureunion-explained-f5491f815f  Imports import pandas as pd import numpy as np from sklearn.base import BaseEstimator, TransformerMixin from sklearn.pipeline import Pipeline Create data data = {&amp;#39;label&amp;#39;: [&amp;#39;dog&amp;#39;, &amp;#39;cat&amp;#39;, &amp;#39;catdog&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;catdog&amp;#39;], &amp;#39;score&amp;#39;: [1, 2, 3, 4, 5]} df = pd.DataFrame(data, columns = [&amp;#34;label&amp;#34;, &amp;#34;score&amp;#34;]) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .</description>
     </item>
     
   </channel>
