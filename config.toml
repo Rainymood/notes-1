@@ -1,4 +1,4 @@
-baseURL = "https://www.janmeppe.com/notes"
+baseURL = "https://www.janmeppe.com/notes/"
 languageCode = "en-us"
 title = "Jan Meppe"
 theme = "berbera"
