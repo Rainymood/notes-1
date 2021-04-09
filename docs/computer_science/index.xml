@@ -1,21 +1,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>computer_science - Chris Albon</title>
-    <link>https://chrisalbon.com/computer_science/index.xml</link>
+    <title>computer_science - Jan Meppe</title>
+    <link>https://www.janmeppe.com/computer_science/index.xml</link>
     <description></description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://chrisalbon.com/computer_science/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.janmeppe.com/computer_science/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Quicksort</title>
-      <link>https://chrisalbon.com/computer_science/algorithms/quicksort/</link>
+      <link>https://www.janmeppe.com/computer_science/algorithms/quicksort/</link>
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://chrisalbon.com/computer_science/algorithms/quicksort/</guid>
+      <guid>https://www.janmeppe.com/computer_science/algorithms/quicksort/</guid>
       <description>Quicksort Implementation of the quicksort algorithm. This divide and conquer algorithm works by splitting up the problem by:
  Splitting up the problem in a base case (empty or element 1) Subdividing the problem until you end up in one of the base cases  Solution is not optimal, construction of lesser and greater could be done in place I believe.
 def quicksort(arr): # base case [] or [.] if len(arr) &amp;lt; 2: return arr # otherwise choose pivot and recurse pivot = arr[0] lesser = [i for i in arr[1:] if i &amp;lt;= pivot] greater = [i for i in arr[1:] if i &amp;gt;= pivot] return quicksort(lesser) + [pivot] + quicksort(greater) quicksort([1, 2, 1, 0, 1, 2, 3, 4]) [0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 4]  </description>
