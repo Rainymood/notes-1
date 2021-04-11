@@ -14,6 +14,8 @@
         <div class="row">
             <div class="col-sm-12 blurb">
                 <p>Atomic and reusable data science and machine learning snippets.</p>
+
+                <p>Names must be descriptive without technical jargon.</p>
             </div>
         </div>
 
@@ -401,6 +403,35 @@
                 </div>
             </div>
         </div>
+
+        <div class="row" id="data_science">
+            <div class="col-sm-12">
+                <h3 class="category_header">Data Science</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">Basics</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ $pages := .Pages }}
+                            {{ if .IsHome }}
+                                {{ $pages = .Site.RegularPages }}
+                            {{ end }}
+                            {{ range (where $pages "File.Dir" "in" "/data_science/basics/") }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="row" id="deep_learning">
             <div class="col-sm-12">

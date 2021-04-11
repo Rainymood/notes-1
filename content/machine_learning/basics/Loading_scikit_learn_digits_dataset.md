@@ -77,7 +77,7 @@ plt.show()
 
 
     
-![png](Loading_scikit_learn_digits_dataset_10_0.png)
+![png](Loading_scikit_learn_digits_dataset_files/Loading_scikit_learn_digits_dataset_10_0.png)
     
 
 

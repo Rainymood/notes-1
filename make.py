@@ -90,4 +90,8 @@ for file in all_md_files:
 
             new_link = "!["+md_image_title+"]("+md_image_filename+")"
 
-            replaceAll(file, link, new_link)
+            print("Replacing:")
+            print("=> ", link)
+            print("=> ", new_link)
+
+            # replaceAll(file, link, new_link)

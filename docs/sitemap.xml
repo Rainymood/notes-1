@@ -3,12 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/combining-columns-together-with-columntransformer/</loc>
+    <loc>https://www.janmeppe.com/notes/machine_learning/vectors_matrices_and_arrays/get-nth-row-of-dataframe/</loc>
+    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/</loc>
+    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/index.xml</loc>
+    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/combining_columns_together/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.janmeppe.com/notes/computer_science/index.xml</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/preprocessing_structured_data/convert_categorical_data_to_labels/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -28,7 +48,32 @@
   </url>
   
   <url>
-    <loc>https://www.janmeppe.com/notes/</loc>
+    <loc>https://www.janmeppe.com/notes/data_science/index.xml</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/preprocessing_structured_data/discretize_features/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/preprocessing_structured_data/drop_rows_missing_data/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/preprocessing_structured_data/encode_ordinal_categorical_features/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/example-pipeline-boston-dataset-standardscaler-pca-ridge/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/preprocessing_structured_data/impute-missing-data/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -53,7 +98,7 @@
   </url>
   
   <url>
-    <loc>https://www.janmeppe.com/notes/machine_learning/index.xml</loc>
+    <loc>https://www.janmeppe.com/notes/machine_learning/preprocessing_structured_data/one_hot_encode_categorical_features/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -63,13 +108,27 @@
   </url>
   
   <url>
-    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting-non-numerical-columns-with-columnselector/</loc>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting_non_numerical_columns/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting_numerical_columns_with_custom_transformer/</loc>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/selecting_numerical_columns/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/data_science/basics/should_you_train_preprocessing_on_test_set/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/simple_boston_pipeline/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/machine_learning/examples/untitled/</loc>
   </url>
   
 </urlset>

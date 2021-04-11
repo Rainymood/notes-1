@@ -1,0 +1,28 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data_science - Jan Meppe</title>
+    <link>https://www.janmeppe.com/notes/data_science/index.xml</link>
+    <description></description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.janmeppe.com/notes/data_science/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Should you train preprocessing on the test set?</title>
+      <link>https://www.janmeppe.com/notes/data_science/basics/should_you_train_preprocessing_on_test_set/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/data_science/basics/should_you_train_preprocessing_on_test_set/</guid>
+      <description>NO. NEVER PREPROCESS YOUR TEST SET
+This is a mistake because it leaks data from your train set into your test set.
+Consider this example, first a processing routine is applied:
+def processing(df): ... return(df) df = processing(df) And then later the data is split into a test and train set:
+X_train, X_test, y_train, y_test = train_test_split(df[features], df[target], test_size=0.33, random_state=42) This is wrong, and only right by accident.
+Do this the other way around.</description>
+    </item>
+    
+  </channel>
+</rss>

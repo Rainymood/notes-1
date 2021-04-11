@@ -54,6 +54,6 @@ plt.show()
 
 
     
-![png](Create_simulated_data_for_clustering_%28blobs%29_9_0.png)
+![png](Create_simulated_data_for_clustering_%28blobs%29_files/Create_simulated_data_for_clustering_%28blobs%29_9_0.png)
     
 

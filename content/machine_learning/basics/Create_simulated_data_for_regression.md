@@ -124,6 +124,6 @@ plt.show()
 
 
     
-![png](Create_simulated_data_for_regression_11_0.png)
+![png](Create_simulated_data_for_regression_files/Create_simulated_data_for_regression_11_0.png)
     
 
