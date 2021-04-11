@@ -88,6 +88,28 @@
             </div>
         </div>
 
+        <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <h4 class="card-header">Pipeline examples</h4>
+                        <div class="card-body">
+                            <ul>
+                                {{ $pages := .Pages }}
+                                {{ if .IsHome }}
+                                    {{ $pages = .Site.RegularPages }}
+                                {{ end }}
+                                {{ range (where $pages "File.Dir" "in" "/machine_learning/pipeline_examples/") }}
+                                <li>
+                                    <a href="{{.Permalink}}">{{.Title}}</a>
+                                </li>
+                                {{ end }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
         <div class="row">
             <div class="col-sm-12">

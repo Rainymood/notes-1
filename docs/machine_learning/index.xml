@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Iris pipeline</title>
+      <link>https://www.janmeppe.com/notes/machine_learning/pipeline_examples/iris_pipeline/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/machine_learning/pipeline_examples/iris_pipeline/</guid>
+      <description>Imports from sklearn import datasets import numpy as np import pandas as pd import seaborn as sns from sklearn.model_selection import train_test_split from sklearn.pipeline import Pipeline from sklearn.preprocessing import StandardScaler from sklearn.svm import SVC from sklearn.model_selection import GridSearchCV Load data iris = datasets.load_iris() df = pd.DataFrame( data=np.c_[iris[&amp;#34;data&amp;#34;], iris[&amp;#34;target&amp;#34;]], columns=iris[&amp;#34;feature_names&amp;#34;] + [&amp;#34;target&amp;#34;] ) df.head()  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }</description>
+    </item>
+    
+    <item>
       <title>Combining columns together</title>
       <link>https://www.janmeppe.com/notes/machine_learning/pipelines/combining_columns_together/</link>
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
@@ -96,15 +105,6 @@ X, labels = make_moons(noise=0.1) Generate colormap (what the fuck?) colors = np
       
       <guid>https://www.janmeppe.com/notes/machine_learning/preprocessing_structured_data/encode_ordinal_categorical_features/</guid>
       <description>OrdinalEncoder is very confusing (so don&amp;rsquo;t worry if you don&amp;rsquo;t get it&amp;hellip; it&amp;rsquo;s confusing) Make sure you input a list of lists  import pandas as pd import numpy as np from sklearn.preprocessing import OrdinalEncoder Create data d = {&amp;#39;rating&amp;#39;: [&amp;#34;first&amp;#34;, &amp;#34;second&amp;#34;, &amp;#34;third&amp;#34;, &amp;#34;first&amp;#34;, &amp;#34;second&amp;#34;, &amp;#34;second&amp;#34;]} df = pd.DataFrame(d) df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }</description>
-    </item>
-    
-    <item>
-      <title>Example pipeline Boston: StandardScaler, PCA, Ridge</title>
-      <link>https://www.janmeppe.com/notes/machine_learning/pipelines/example-pipeline-boston-dataset-standardscaler-pca-ridge/</link>
-      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/example-pipeline-boston-dataset-standardscaler-pca-ridge/</guid>
-      <description>Imports import pandas as pd import numpy as np from sklearn.datasets import load_boston from sklearn.model_selection import train_test_split from sklearn.preprocessing import StandardScaler from sklearn.decomposition import PCA from sklearn.linear_model import Ridge from sklearn.pipeline import Pipeline from sklearn.model_selection import GridSearchCV Load in data data = load_boston() X_train, X_test, y_train, y_test = train_test_split(data[&amp;#39;data&amp;#39;], data[&amp;#39;target&amp;#39;]) Create pipeline pipe = Pipeline([ (&amp;#39;scaler&amp;#39;, StandardScaler()), (&amp;#39;reduce_dim&amp;#39;, PCA()), (&amp;#39;regressor&amp;#39;, Ridge()) ]) Fit pipeline pipe = pipe.fit(X_train, y_train) View parameters with get_params() pipe.</description>
     </item>
     
     <item>
@@ -192,20 +192,11 @@ boston = datasets.load_boston() # Load features X = boston.data # Load data y = 
     
     <item>
       <title>Simple Boston pipeline</title>
-      <link>https://www.janmeppe.com/notes/machine_learning/pipelines/simple_boston_pipeline/</link>
+      <link>https://www.janmeppe.com/notes/machine_learning/pipeline_examples/simple_boston_pipeline/</link>
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://www.janmeppe.com/notes/machine_learning/pipelines/simple_boston_pipeline/</guid>
+      <guid>https://www.janmeppe.com/notes/machine_learning/pipeline_examples/simple_boston_pipeline/</guid>
       <description>Imports import pandas as pd import numpy as np from sklearn.datasets import load_boston from sklearn.model_selection import train_test_split from sklearn.preprocessing import StandardScaler from sklearn.decomposition import PCA from sklearn.linear_model import Ridge from sklearn.pipeline import Pipeline from sklearn.model_selection import GridSearchCV Load in data data = load_boston() X_train, X_test, y_train, y_test = train_test_split(data[&amp;#39;data&amp;#39;], data[&amp;#39;target&amp;#39;]) Create pipeline pipe = Pipeline([ (&amp;#39;scaler&amp;#39;, StandardScaler()), (&amp;#39;reduce_dim&amp;#39;, PCA()), (&amp;#39;regressor&amp;#39;, Ridge()) ]) Fit pipeline pipe = pipe.fit(X_train, y_train) View parameters with get_params() pipe.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://www.janmeppe.com/notes/machine_learning/examples/untitled/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.janmeppe.com/notes/machine_learning/examples/untitled/</guid>
-      <description>from sklearn import datasets import numpy as np import pandas as pd import seaborn as sns from sklearn.model_selection import train_test_split from sklearn.pipeline import Pipeline from sklearn.preprocessing import StandardScaler from sklearn.svm import SVC # Load Iris datset iris = datasets.load_iris() df = pd.DataFrame( data=np.c_[iris[&amp;#34;data&amp;#34;], iris[&amp;#34;target&amp;#34;]], columns=iris[&amp;#34;feature_names&amp;#34;] + [&amp;#34;target&amp;#34;] ) df.head()  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }</description>
     </item>
     
   </channel>

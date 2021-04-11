@@ -16,22 +16,37 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="" />
-<meta property="og:description" content="from sklearn import datasets import numpy as np import pandas as pd import seaborn as sns from sklearn.model_selection import train_test_split from sklearn.pipeline import Pipeline from sklearn.preprocessing import StandardScaler from sklearn.svm import SVC # Load Iris datset iris = datasets.load_iris() df = pd.DataFrame( data=np.c_[iris[&#34;data&#34;], iris[&#34;target&#34;]], columns=iris[&#34;feature_names&#34;] &#43; [&#34;target&#34;] ) df.head()  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }" />
+<meta property="og:title" content="Iris pipeline" />
+<meta property="og:description" content="Iris pipeline" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.janmeppe.com/notes/machine_learning/examples/untitled/" />
-
+<meta property="og:url" content="https://www.janmeppe.com/notes/machine_learning/pipeline_examples/iris_pipeline/" />
+<meta property="article:published_time" content="2021-04-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-11T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="from sklearn import datasets import numpy as np import pandas as pd import seaborn as sns from sklearn.model_selection import train_test_split from sklearn.pipeline import Pipeline from sklearn.preprocessing import StandardScaler from sklearn.svm import SVC # Load Iris datset iris = datasets.load_iris() df = pd.DataFrame( data=np.c_[iris[&#34;data&#34;], iris[&#34;target&#34;]], columns=iris[&#34;feature_names&#34;] &#43; [&#34;target&#34;] ) df.head()  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; }"/>
+<meta name="twitter:title" content="Iris pipeline"/>
+<meta name="twitter:description" content="Iris pipeline"/>
 
 
     
-    
-    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Iris pipeline",
+  "url": "https:\/\/www.janmeppe.com\/notes\/machine_learning\/pipeline_examples\/iris_pipeline\/",
+  "wordCount": "536",
+  "datePublished": "2021-04-11T00:00:00\u002b00:00",
+  "dateModified": "2021-04-11T00:00:00\u002b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jan Meppe"
+  },
+  "description": "Iris pipeline"
+}
+</script> 
 
-    <title></title>
+    <title>Iris pipeline</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -93,11 +108,22 @@
         <div class="row">
             <div class="col-sm-12">
 
-                
+                 
+
+
 <article>
-  <div class="page">
-    <div class="content">
-      <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+  <div class="technical_note">
+  <header>
+      
+    <h1 class="technical_note_title">Iris pipeline</h1>
+    <div class="technical_note_date">
+      <time datetime=" 2021-04-11T00:00:00Z "> 11 Apr 2021</time>
+    </div>
+  </header>
+  <div class="content">
+      
+  <h2 id="imports">Imports</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
@@ -106,8 +132,9 @@
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Load Iris datset</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+</code></pre></div><h2 id="load-data">Load data</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 </code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">iris</span><span class="p">[</span><span class="s2">&#34;data&#34;</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s2">&#34;target&#34;</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s2">&#34;feature_names&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&#34;target&#34;</span><span class="p">]</span>
 <span class="p">)</span>
@@ -182,6 +209,7 @@
   </tbody>
 </table>
 </div>
+<h2 id="visualise-data-and-inspect-for-missing-valuesoutliers">Visualise data and inspect for missing values/outliers</h2>
 <ul>
 <li>First thing we want to do is inspect the data to see if we have any missing values or outliers</li>
 </ul>
@@ -201,22 +229,24 @@ memory usage: 5.9 KB
 <li><code>df.info()</code> shows that there are no missing values as we have 150 non-null values</li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</code></pre></div><pre><code>&lt;seaborn.axisgrid.PairGrid at 0x11c98c908&gt;
+</code></pre></div><pre><code>&lt;seaborn.axisgrid.PairGrid at 0x11e375358&gt;
 </code></pre>
-<p><img src="Untitled_files/Untitled_6_1.png" alt="png"></p>
+<p><img src="Iris_pipeline_files/Iris_pipeline_10_1.png" alt="png"></p>
 <ul>
 <li><code>sns.pairplot</code> gives a beautiful overview of the data</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<h2 id="train-test-split">Train-test split</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">df_</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">df_</span>
 </code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+</code></pre></div><h2 id="setup-pipeline">Setup pipeline</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
     <span class="p">(</span><span class="s2">&#34;std&#34;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
     <span class="p">(</span><span class="s2">&#34;clf&#34;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&#34;linear&#34;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="p">])</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div><h2 id="train-pipeline">Train pipeline</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </code></pre></div><pre><code>Pipeline(memory=None,
          steps=[('std',
                  StandardScaler(copy=True, with_mean=True, with_std=True)),
@@ -228,53 +258,106 @@ memory usage: 5.9 KB
                      tol=0.001, verbose=False))],
          verbose=False)
 </code></pre>
+<h2 id="training-set-accuracy">Training set accuracy</h2>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</code></pre></div><pre><code>0.97
+</code></pre></div><pre><code>0.96
 </code></pre>
+<h2 id="test-set-accuracy">Test set accuracy</h2>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </code></pre></div><pre><code>0.98
 </code></pre>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">X_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">10</span><span class="p">]]</span>
-</code></pre></div><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code>.dataframe tbody tr th {
-    vertical-align: top;
-}
-
-.dataframe thead th {
-    text-align: right;
-}
+<h2 id="grid-search">Grid search</h2>
+<p>First check the parameters of the pipeline.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+</code></pre></div><pre><code>{'memory': None,
+ 'steps': [('std', StandardScaler(copy=True, with_mean=True, with_std=True)),
+  ('clf', SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+       decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+       kernel='linear', max_iter=-1, probability=False, random_state=None,
+       shrinking=True, tol=0.001, verbose=False))],
+ 'verbose': False,
+ 'std': StandardScaler(copy=True, with_mean=True, with_std=True),
+ 'clf': SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+     decision_function_shape='ovr', degree=3, gamma='auto_deprecated',
+     kernel='linear', max_iter=-1, probability=False, random_state=None,
+     shrinking=True, tol=0.001, verbose=False),
+ 'std__copy': True,
+ 'std__with_mean': True,
+ 'std__with_std': True,
+ 'clf__C': 1,
+ 'clf__cache_size': 200,
+ 'clf__class_weight': None,
+ 'clf__coef0': 0.0,
+ 'clf__decision_function_shape': 'ovr',
+ 'clf__degree': 3,
+ 'clf__gamma': 'auto_deprecated',
+ 'clf__kernel': 'linear',
+ 'clf__max_iter': -1,
+ 'clf__probability': False,
+ 'clf__random_state': None,
+ 'clf__shrinking': True,
+ 'clf__tol': 0.001,
+ 'clf__verbose': False}
 </code></pre>
-<p></style></p>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>sepal length (cm)</th>
-      <th>sepal width (cm)</th>
-      <th>petal length (cm)</th>
-      <th>petal width (cm)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>86</th>
-      <td>6.7</td>
-      <td>3.1</td>
-      <td>4.7</td>
-      <td>1.5</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<p>We want to try different values for <code>C = (0.01, 0.10, 1.0, 10, 100)</code> so that is <code>clf__C</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&#34;clf__C&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">gridsearch</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gridsearch</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div><pre><code>/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/sklearn/model_selection/_split.py:1978: FutureWarning: The default value of cv will change from 3 to 5 in version 0.22. Specify it explicitly to silence this warning.
+  warnings.warn(CV_WARNING, FutureWarning)
+/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/sklearn/model_selection/_search.py:813: DeprecationWarning: The default of the `iid` parameter will change from True to False in version 0.22 and will be removed in 0.24. This will change numeric results when test-set sizes are unequal.
+  DeprecationWarning)
+
+
+
+
+
+GridSearchCV(cv='warn', error_score='raise-deprecating',
+             estimator=Pipeline(memory=None,
+                                steps=[('std',
+                                        StandardScaler(copy=True,
+                                                       with_mean=True,
+                                                       with_std=True)),
+                                       ('clf',
+                                        SVC(C=1, cache_size=200,
+                                            class_weight=None, coef0=0.0,
+                                            decision_function_shape='ovr',
+                                            degree=3, gamma='auto_deprecated',
+                                            kernel='linear', max_iter=-1,
+                                            probability=False,
+                                            random_state=None, shrinking=True,
+                                            tol=0.001, verbose=False))],
+                                verbose=False),
+             iid='warn', n_jobs=-1,
+             param_grid={'clf__C': [0.01, 0.1, 1.0, 10, 100]},
+             pre_dispatch='2*n_jobs', refit=True, return_train_score=False,
+             scoring=None, verbose=0)
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Best score for train set:&#39;</span><span class="p">,</span> <span class="n">gridsearch</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span> 
+</code></pre></div><pre><code>Best score for train set: 0.94
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Best param C:&#39;</span><span class="p">,</span> <span class="n">gridsearch</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s1">&#39;clf__C&#39;</span><span class="p">])</span>
+</code></pre></div><pre><code>Best param C: 0.1
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;Best score for test set:&#34;</span><span class="p">,</span> <span class="n">gridsearch</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre></div><pre><code>Best score for test set: 1.0
+</code></pre>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
 </code></pre></div>
+</div>
+  <aside>
+      <div class="bug_reporting">
+          <h4>Find an error or bug?</h4>
+          <p>Everything on this site is available on GitHub. Head to <a href='https://github.com/chrisalbon/notes/issues/new'>and submit a suggested change</a>. Include the tutorial's URL in the issue.</p>
+      </div>
+      </aside>
+
     </div>
-  </div>
 </article>
+
+
 
 
             </div>
@@ -286,7 +369,7 @@ memory usage: 5.9 KB
 
     <footer class="footer text-center">
         <div class="container">
-            <span class="text-muted">All 22 notes and articles are available on <a href="https://github.com/Rainymood/notes">GitHub</a>. Made with ❤️ by <a href="https://www.janmeppe.com/">Jan Meppe</a>, inspired by <a href="https://chrisalbon.com/">Chris Albon</a></span>
+            <span class="text-muted">All 21 notes and articles are available on <a href="https://github.com/Rainymood/notes">GitHub</a>. Made with ❤️ by <a href="https://www.janmeppe.com/">Jan Meppe</a>, inspired by <a href="https://chrisalbon.com/">Chris Albon</a></span>
         </div>
     </footer>
 
