@@ -5,10 +5,19 @@
     <description></description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Apr 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://www.janmeppe.com/notes/computer_science/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2D array hourglass</title>
+      <link>https://www.janmeppe.com/notes/computer_science/hackerrank/2d_array_hourglass/</link>
+      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/computer_science/hackerrank/2d_array_hourglass/</guid>
+      <description>Problem Solution #!/bin/python3 import math import os import random import re import sys # Complete the hourglassSum function below. def hourglassSum(arr): count = -63 for i in range(4): for j in range(4): hourglass_sum = arr[i][j] + arr[i][j+1] + arr[i][j+2] + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2] if hourglass_sum &amp;gt; count: count = hourglass_sum return count if __name__ == &amp;#39;__main__&amp;#39;: fptr = open(os.environ[&amp;#39;OUTPUT_PATH&amp;#39;], &amp;#39;w&amp;#39;) arr = [] for _ in range(6): arr.</description>
+    </item>
     
     <item>
       <title>Quicksort</title>

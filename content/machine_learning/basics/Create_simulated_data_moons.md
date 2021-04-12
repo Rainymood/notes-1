@@ -51,6 +51,6 @@ plt.show()
 
 
     
-![png](Create_simulated_data_moons_files/Create_simulated_data_moons_9_0.png)
+![png](Create_simulated_data_moons_9_0.png)
     
 

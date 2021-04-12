@@ -1118,6 +1118,28 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <h4 class="card-header">HackerRank</h4>
+                    <div class="card-body">
+                        <ul>
+                            {{ $pages := .Pages }}
+                            {{ if .IsHome }}
+                                {{ $pages = .Site.RegularPages }}
+                            {{ end }}
+                            {{ range (where $pages "File.Dir" "in" "/computer_science/hackerrank/") }}
+                            <li>
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row" id="linux">
             <div class="col-sm-12">
                 <h3 class="category_header">Linux Command Line</h3>

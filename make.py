@@ -94,4 +94,4 @@ for file in all_md_files:
             print("=> ", link)
             print("=> ", new_link)
 
-            # replaceAll(file, link, new_link)
+            replaceAll(file, link, new_link)

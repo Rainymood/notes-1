@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.janmeppe.com/notes/computer_science/hackerrank/2d_array_hourglass/</loc>
+    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/computer_science/index.xml</loc>
+    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.janmeppe.com/notes/</loc>
+    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.janmeppe.com/notes/machine_learning/vectors_matrices_and_arrays/get-nth-row-of-dataframe/</loc>
     <lastmod>2021-04-11T00:00:00+00:00</lastmod>
   </url>
@@ -13,22 +28,12 @@
   </url>
   
   <url>
-    <loc>https://www.janmeppe.com/notes/</loc>
-    <lastmod>2021-04-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.janmeppe.com/notes/machine_learning/index.xml</loc>
     <lastmod>2021-04-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.janmeppe.com/notes/machine_learning/pipelines/combining_columns_together/</loc>
-    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.janmeppe.com/notes/computer_science/index.xml</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   

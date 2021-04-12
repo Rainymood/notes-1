@@ -150,7 +150,7 @@ sns.pairplot(df)
 
 
     
-![png](Iris_pipeline_files/Iris_pipeline_10_1.png)
+![png](Iris_pipeline_10_1.png)
     
 
 
