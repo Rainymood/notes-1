@@ -1,15 +1,15 @@
 ---
-title: "2D array hourglass"
+title: "2D array hourglass solution"
 author: "Jan Meppe"
 date: 2021-04-12
-description: "2D array hourglass"
+description: "2D array hourglass solution"
 type: technical_note
 draft: false
 ---
 
 ## Problem
 
-![link](2d-array-English.pdf)
+[pdf](/pdf/2d-array-English.pdf)
 
 ## Solution
 
