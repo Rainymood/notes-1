@@ -16,16 +16,16 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta property="og:title" content="Arrays: Left Rotation" />
-<meta property="og:description" content="Arrays: Left Rotation" />
+<meta property="og:title" content="Arrays: Left Rotation solution" />
+<meta property="og:description" content="Arrays: Left Rotation solution" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.janmeppe.com/notes/computer_science/hackerrank/ctci-array-left-rotation-english/" />
 <meta property="article:published_time" content="2021-04-12T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-04-12T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Arrays: Left Rotation"/>
-<meta name="twitter:description" content="Arrays: Left Rotation"/>
+<meta name="twitter:title" content="Arrays: Left Rotation solution"/>
+<meta name="twitter:description" content="Arrays: Left Rotation solution"/>
 
 
     
@@ -33,20 +33,20 @@
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
-  "headline": "Arrays: Left Rotation",
+  "headline": "Arrays: Left Rotation solution",
   "url": "https:\/\/www.janmeppe.com\/notes\/computer_science\/hackerrank\/ctci-array-left-rotation-english\/",
-  "wordCount": "121",
+  "wordCount": "118",
   "datePublished": "2021-04-12T00:00:00\u002b00:00",
   "dateModified": "2021-04-12T00:00:00\u002b00:00",
   "author": {
     "@type": "Person",
     "name": "Jan Meppe"
   },
-  "description": "Arrays: Left Rotation"
+  "description": "Arrays: Left Rotation solution"
 }
 </script> 
 
-    <title>Arrays: Left Rotation</title>
+    <title>Arrays: Left Rotation solution</title>
 
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -115,7 +115,7 @@
   <div class="technical_note">
   <header>
       
-    <h1 class="technical_note_title">Arrays: Left Rotation</h1>
+    <h1 class="technical_note_title">Arrays: Left Rotation solution</h1>
     <div class="technical_note_date">
       <time datetime=" 2021-04-12T00:00:00Z "> 12 Apr 2021</time>
     </div>
@@ -124,6 +124,7 @@
       
   <h2 id="problem">Problem</h2>
 <p><a href="https://www.janmeppe.com/notes/pdf/ctci-array-left-rotation-English.pdf">pdf</a></p>
+<p>See <a href="https://community.rstudio.com/t/is-there-a-place-we-can-put-non-blog-files-pdf-files-in-blogdown/10138/4">this link</a> on how to link to static files in Hugo.</p>
 <h2 id="solution">Solution</h2>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/bin/python3</span>
 
@@ -133,39 +134,37 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="c1"># Complete the hourglassSum function below.</span>
-<span class="k">def</span> <span class="nf">hourglassSum</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="o">-</span><span class="mi">63</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-            <span class="n">hourglass_sum</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
-            
-            <span class="k">if</span> <span class="n">hourglass_sum</span> <span class="o">&gt;</span> <span class="n">count</span><span class="p">:</span>
-                <span class="n">count</span> <span class="o">=</span> <span class="n">hourglass_sum</span>
-    <span class="k">return</span> <span class="n">count</span>
+<span class="c1"># Complete the rotLeft function below.</span>
+<span class="k">def</span> <span class="nf">rotLeft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">a</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">fptr</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OUTPUT_PATH&#39;</span><span class="p">],</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 
-    <span class="n">arr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
-        <span class="n">arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())))</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">hourglassSum</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nd</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="n">fptr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">rotLeft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+    <span class="n">fptr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">)))</span>
+    <span class="n">fptr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
     <span class="n">fptr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div><h2 id="main-idea">Main idea</h2>
 <ul>
-<li>Draw the problem</li>
-<li>Brute-force loop through the array, calculate, and keep track of the maximum value</li>
+<li>Pop the first element and append it at the same time to the array, repeat <code>d</code> times</li>
 </ul>
-<h2 id="lessons">Lessons</h2>
+<h2 id="lessons-learned">Lessons learned</h2>
 <ul>
-<li>The first step you want to do is brute-force a solution</li>
-<li>Use a counter to keep track of the target value</li>
+<li>What is the simplest solution that you can think of?</li>
+<li>Can you split it up into a step that you have to repeat <code>x</code> times?</li>
 </ul>
 
 </div>

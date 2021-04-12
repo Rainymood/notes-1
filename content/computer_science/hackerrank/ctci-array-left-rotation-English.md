@@ -48,3 +48,12 @@ if __name__ == '__main__':
 
     fptr.close()
 ```
+
+## Main idea
+
+* Pop the first element and append it at the same time to the array, repeat `d` times
+
+## Lessons learned
+
+* What is the simplest solution that you can think of?
+* Can you split it up into a step that you have to repeat `x` times?

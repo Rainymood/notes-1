@@ -11,22 +11,24 @@
     
     
     <item>
-      <title>2D array hourglass</title>
+      <title>2D array hourglass solution</title>
       <link>https://www.janmeppe.com/notes/computer_science/hackerrank/2d_array_hourglass/</link>
       <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://www.janmeppe.com/notes/computer_science/hackerrank/2d_array_hourglass/</guid>
-      <description>Problem Solution #!/bin/python3 import math import os import random import re import sys # Complete the hourglassSum function below. def hourglassSum(arr): count = -63 for i in range(4): for j in range(4): hourglass_sum = arr[i][j] + arr[i][j+1] + arr[i][j+2] + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2] if hourglass_sum &amp;gt; count: count = hourglass_sum return count if __name__ == &amp;#39;__main__&amp;#39;: fptr = open(os.environ[&amp;#39;OUTPUT_PATH&amp;#39;], &amp;#39;w&amp;#39;) arr = [] for _ in range(6): arr.</description>
+      <description>Problem pdf
+Solution #!/bin/python3 import math import os import random import re import sys # Complete the hourglassSum function below. def hourglassSum(arr): count = -63 for i in range(4): for j in range(4): hourglass_sum = arr[i][j] + arr[i][j+1] + arr[i][j+2] + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2] if hourglass_sum &amp;gt; count: count = hourglass_sum return count if __name__ == &amp;#39;__main__&amp;#39;: fptr = open(os.environ[&amp;#39;OUTPUT_PATH&amp;#39;], &amp;#39;w&amp;#39;) arr = [] for _ in range(6): arr.</description>
     </item>
     
     <item>
-      <title>Arrays: Left Rotation</title>
+      <title>Arrays: Left Rotation solution</title>
       <link>https://www.janmeppe.com/notes/computer_science/hackerrank/ctci-array-left-rotation-english/</link>
       <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://www.janmeppe.com/notes/computer_science/hackerrank/ctci-array-left-rotation-english/</guid>
       <description>Problem pdf
-Solution #!/bin/python3 import math import os import random import re import sys # Complete the hourglassSum function below. def hourglassSum(arr): count = -63 for i in range(4): for j in range(4): hourglass_sum = arr[i][j] + arr[i][j+1] + arr[i][j+2] + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2] if hourglass_sum &amp;gt; count: count = hourglass_sum return count if __name__ == &amp;#39;__main__&amp;#39;: fptr = open(os.environ[&amp;#39;OUTPUT_PATH&amp;#39;], &amp;#39;w&amp;#39;) arr = [] for _ in range(6): arr.</description>
+See this link on how to link to static files in Hugo.
+Solution #!/bin/python3 import math import os import random import re import sys # Complete the rotLeft function below. def rotLeft(a, d): for i in range(d): a.append(a.pop(0)) return a if __name__ == &amp;#39;__main__&amp;#39;: fptr = open(os.environ[&amp;#39;OUTPUT_PATH&amp;#39;], &amp;#39;w&amp;#39;) nd = input().split() n = int(nd[0]) d = int(nd[1]) a = list(map(int, input().rstrip().split())) result = rotLeft(a, d) fptr.write(&amp;#39; &amp;#39;.join(map(str, result))) fptr.</description>
     </item>
     
     <item>
