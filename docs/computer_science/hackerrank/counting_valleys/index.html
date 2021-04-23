@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66582-32"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-66582-32');
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Counting valleys solution" />
+<meta property="og:description" content="Counting valleys solution" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.janmeppe.com/notes/computer_science/hackerrank/counting_valleys/" />
+<meta property="article:published_time" content="2021-04-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-14T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Counting valleys solution"/>
+<meta name="twitter:description" content="Counting valleys solution"/>
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Counting valleys solution",
+  "url": "https:\/\/www.janmeppe.com\/notes\/computer_science\/hackerrank\/counting_valleys\/",
+  "wordCount": "357",
+  "datePublished": "2021-04-14T00:00:00\u002b00:00",
+  "dateModified": "2021-04-14T00:00:00\u002b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jan Meppe"
+  },
+  "description": "Counting valleys solution"
+}
+</script> 
+
+    <title>Counting valleys solution</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.janmeppe.com/notes/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.janmeppe.com/notes/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Jan Meppe All Notes And Articles" />  
+    
+
+    
+    <link href="https://www.janmeppe.com/notes//articles/index.xml" rel="alternate" type="application/rss+xml" title="Jan Meppe Articles" />
+
+    <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.janmeppe.com/notes/">Jan Meppe</a>
+
+
+            
+
+
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                 
+
+
+<article>
+  <div class="technical_note">
+  <header>
+      
+    <h1 class="technical_note_title">Counting valleys solution</h1>
+    <div class="technical_note_date">
+      <time datetime=" 2021-04-14T00:00:00Z "> 14 Apr 2021</time>
+    </div>
+  </header>
+  <div class="content">
+      
+  <h2 id="problem">Problem</h2>
+<p><a href="https://www.hackerrank.com/challenges/counting-valleys/problem?h_l=interview&amp;playlist_slugs%5B%5D=interview-preparation-kit&amp;playlist_slugs%5B%5D=warmup">link</a></p>
+<p>An avid hiker keeps meticulous records of their hikes. During the last hike that took exactly  steps, for every step it was noted if it was an uphill, , or a downhill,  step. Hikes always start and end at sea level, and each step up or down represents a  unit change in altitude. We define the following terms:</p>
+<p>A mountain is a sequence of consecutive steps above sea level, starting with a step up from sea level and ending with a step down to sea level.
+A valley is a sequence of consecutive steps below sea level, starting with a step down from sea level and ending with a step up to sea level.
+Given the sequence of up and down steps during a hike, find and print the number of valleys walked through.</p>
+<p>Example</p>
+<p>The hiker first enters a valley  units deep. Then they climb out and up onto a mountain  units high. Finally, the hiker returns to sea level and ends the hike.</p>
+<p>Function Description</p>
+<p>Complete the countingValleys function in the editor below.</p>
+<p>countingValleys has the following parameter(s):</p>
+<p>int steps: the number of steps on the hike
+string path: a string describing the path
+Returns</p>
+<p>int: the number of valleys traversed
+Input Format</p>
+<p>The first line contains an integer , the number of steps in the hike.
+The second line contains a single string , of  characters that describe the path.</p>
+<p>Constraints</p>
+<p>Sample Input</p>
+<p>8
+UDDDUDUU
+Sample Output</p>
+<p>1
+Explanation</p>
+<p>If we represent _ as sea level, a step up as /, and a step down as , the hike can be drawn as:</p>
+<p>_/\      _
+\    /
+//
+The hiker enters and leaves one valley.</p>
+<h2 id="solution">Solution</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">steps</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&#34;UDDDUDUU&#34;</span>
+
+<span class="k">def</span> <span class="nf">countingValleys</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">step</span> <span class="o">==</span> <span class="s2">&#34;U&#34;</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="s2">&#34;U&#34;</span><span class="p">:</span>
+            <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">level</span> <span class="o">-=</span> <span class="mi">1</span>
+            
+    <span class="k">return</span> <span class="n">count</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">countingValleys</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div><pre><code>1
+</code></pre>
+<h2 id="lessons">Lessons</h2>
+<ul>
+<li>Keep track of variables with a counter</li>
+<li>Do it on paper and do it by hand, look for &ldquo;smart&rdquo; algorithms, don&rsquo;t worry about efficiency just yet</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div>
+</div>
+  <aside>
+      <div class="bug_reporting">
+          <h4>Find an error or bug?</h4>
+          <p>Everything on this site is available on GitHub. Head to <a href='https://github.com/chrisalbon/notes/issues/new'>and submit a suggested change</a>. Include the tutorial's URL in the issue.</p>
+      </div>
+      </aside>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">All 42 notes and articles are available on <a href="https://github.com/Rainymood/notes">GitHub</a>. Made with ❤️ by <a href="https://www.janmeppe.com/">Jan Meppe</a>, inspired by <a href="https://chrisalbon.com/">Chris Albon</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

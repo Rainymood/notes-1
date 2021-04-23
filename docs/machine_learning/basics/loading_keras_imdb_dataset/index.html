@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66582-32"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-66582-32');
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Loading keras imdb dataset" />
+<meta property="og:description" content="Loading keras imdb dataset" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.janmeppe.com/notes/machine_learning/basics/loading_keras_imdb_dataset/" />
+<meta property="article:published_time" content="2021-04-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-09T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Loading keras imdb dataset"/>
+<meta name="twitter:description" content="Loading keras imdb dataset"/>
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Loading keras imdb dataset",
+  "url": "https:\/\/www.janmeppe.com\/notes\/machine_learning\/basics\/loading_keras_imdb_dataset\/",
+  "wordCount": "570",
+  "datePublished": "2021-04-09T00:00:00\u002b00:00",
+  "dateModified": "2021-04-09T00:00:00\u002b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jan Meppe"
+  },
+  "description": "Loading keras imdb dataset"
+}
+</script> 
+
+    <title>Loading keras imdb dataset</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.janmeppe.com/notes/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.janmeppe.com/notes/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Jan Meppe All Notes And Articles" />  
+    
+
+    
+    <link href="https://www.janmeppe.com/notes//articles/index.xml" rel="alternate" type="application/rss+xml" title="Jan Meppe Articles" />
+
+    <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.janmeppe.com/notes/">Jan Meppe</a>
+
+
+            
+
+
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                 
+
+
+<article>
+  <div class="technical_note">
+  <header>
+      
+    <h1 class="technical_note_title">Loading keras imdb dataset</h1>
+    <div class="technical_note_date">
+      <time datetime=" 2021-04-09T00:00:00Z "> 09 Apr 2021</time>
+    </div>
+  </header>
+  <div class="content">
+      
+  <h1 id="loading-keras-imdb-dataset">Loading Keras IMDB dataset</h1>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">imdb</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+</code></pre></div><p>This downloads 25.000 movie reviews from IMDB with the label positive/negative.</p>
+<p>Each review is encoded as a list of indexes (integers)</p>
+<p>Words are encoded by overall frequency in the dataset. Integer 3 encodes the 3rd most frequent word in the data.</p>
+<h2 id="create-data">Create data</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># set number of features (use top 1000 words)</span>
+<span class="n">num_words</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">index_from</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># load data</span>
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">imdb</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="n">num_words</span><span class="p">,</span> <span class="n">index_from</span><span class="o">=</span><span class="n">index_from</span><span class="p">)</span>
+</code></pre></div><h2 id="convert-word-to-index-and-reverse">Convert word to index (and reverse)</h2>
+<p>Note that by default indexing starts from 3 in the default settings as follows.</p>
+<pre><code>start_char=1, oov_char=2, index_from=3,
+</code></pre><p>This means that:</p>
+<ul>
+<li><code>0</code> is the padding char</li>
+<li><code>1</code> is the start char</li>
+<li><code>2</code> is oov</li>
+<li><code>3</code> is unknown</li>
+</ul>
+<p>So we need to load in the mapping and then shift it 3 to the right, very convenient.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Get word index (word =&gt; index)</span>
+<span class="n">word_to_id</span> <span class="o">=</span> <span class="n">imdb</span><span class="o">.</span><span class="n">get_word_index</span><span class="p">()</span>
+<span class="n">word_to_id</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:(</span><span class="n">v</span><span class="o">+</span><span class="n">index_from</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">word_to_id</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">word_to_id</span><span class="p">[</span><span class="s2">&#34;&lt;PAD&gt;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">word_to_id</span><span class="p">[</span><span class="s2">&#34;&lt;START&gt;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">word_to_id</span><span class="p">[</span><span class="s2">&#34;&lt;UNK&gt;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">word_to_id</span><span class="p">[</span><span class="s2">&#34;&lt;UNUSED&gt;&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Reverse word index (index =&gt; word)</span>
+<span class="n">id_to_word</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">value</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">word_to_id</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</code></pre></div><h2 id="view-data">View data</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="s2">&#34; &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">id_to_word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_train</span><span class="p">[</span><span class="mi">1000</span><span class="p">]])</span>
+</code></pre></div><pre><code>&quot;&lt;START&gt; although i had seen &lt;UNK&gt; in a theater way back in &lt;UNK&gt; i couldn't remember anything of the plot except for &lt;UNK&gt; &lt;UNK&gt; of &lt;UNK&gt; &lt;UNK&gt; running and fighting against a &lt;UNK&gt; of &lt;UNK&gt; &lt;UNK&gt; and &lt;UNK&gt; &lt;UNK&gt; the ending br br after reading some of the other reviews i &lt;UNK&gt; up a &lt;UNK&gt; of the &lt;UNK&gt; released dvd to once again &lt;UNK&gt; the world of &lt;UNK&gt; br br it turns out this is one of those films &lt;UNK&gt; during the &lt;UNK&gt; that would go &lt;UNK&gt; to video today the film stars &lt;UNK&gt; &lt;UNK&gt; &lt;UNK&gt; &lt;UNK&gt; as &lt;UNK&gt; &lt;UNK&gt; &lt;UNK&gt; out of the &lt;UNK&gt; to &lt;UNK&gt; the &lt;UNK&gt; of &lt;UNK&gt; to &lt;UNK&gt; and &lt;UNK&gt; &lt;UNK&gt; the game a &lt;UNK&gt; &lt;UNK&gt; &lt;UNK&gt; by the &lt;UNK&gt; who &lt;UNK&gt; his people by &lt;UNK&gt; what sounds like &lt;UNK&gt; power the &lt;UNK&gt; of the &lt;UNK&gt; &lt;UNK&gt; the star &lt;UNK&gt; &lt;UNK&gt; &lt;UNK&gt; &lt;UNK&gt; is &lt;UNK&gt; in the &lt;UNK&gt; &lt;UNK&gt; by &lt;UNK&gt; &lt;UNK&gt; who never &lt;UNK&gt; or leaves the house once &lt;UNK&gt; tries to &lt;UNK&gt; in with the &lt;UNK&gt; by &lt;UNK&gt; a &lt;UNK&gt; red &lt;UNK&gt; with &lt;UNK&gt; of &lt;UNK&gt; and white &lt;UNK&gt; to say &lt;UNK&gt; finds himself running and fighting for his life along the &lt;UNK&gt; &lt;UNK&gt; of &lt;UNK&gt; on his way to a &lt;UNK&gt; with &lt;UNK&gt; and the game br br star &lt;UNK&gt; &lt;UNK&gt; was &lt;UNK&gt; &lt;UNK&gt; by director robert &lt;UNK&gt; who it looks like was never on the set the so called script is just this side of &lt;UNK&gt; see other reviews for the many &lt;UNK&gt; throughout the town of &lt;UNK&gt; has a few good moments but is &lt;UNK&gt; &lt;UNK&gt; by bad editing the ending &lt;UNK&gt; still there's the &lt;UNK&gt; of a good action &lt;UNK&gt; here a &lt;UNK&gt; &lt;UNK&gt; version with more &lt;UNK&gt; action and &lt;UNK&gt; &lt;UNK&gt; might even be pretty good&quot;
+</code></pre>
+<h2 id="tokenize">Tokenize</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Convert list of integers to one-hot matrix</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="n">num_words</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Convert list of integers into matrix with max length of dict</span>
+<span class="n">train_features</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">sequences_to_matrix</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+<span class="n">test_features</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">sequences_to_matrix</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;train features shape: {train_features.shape}, test features shape {test_features.shape}&#34;</span><span class="p">)</span> 
+</code></pre></div><pre><code>train features shape: (25000, 1000), test features shape (25000, 1000)
+</code></pre>
+<p>Now you have:</p>
+<ul>
+<li><code>(25000, 1000)</code> train features ohe matrix</li>
+<li><code>(25000, 1000)</code> test features ohe matrix</li>
+<li><code>(25000,)</code> train labels</li>
+<li><code>(25000,)</code> test labels</li>
+</ul>
+
+</div>
+  <aside>
+      <div class="bug_reporting">
+          <h4>Find an error or bug?</h4>
+          <p>Everything on this site is available on GitHub. Head to <a href='https://github.com/chrisalbon/notes/issues/new'>and submit a suggested change</a>. Include the tutorial's URL in the issue.</p>
+      </div>
+      </aside>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">All 42 notes and articles are available on <a href="https://github.com/Rainymood/notes">GitHub</a>. Made with ❤️ by <a href="https://www.janmeppe.com/">Jan Meppe</a>, inspired by <a href="https://chrisalbon.com/">Chris Albon</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

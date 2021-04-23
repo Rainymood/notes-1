@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66582-32"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-66582-32');
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="Idea parking space:
+ Extract features from URL  What I&rsquo;ve done so far:
+ Load in the data Inspect the data Look for unique values with (df.value_counts) Look for missing values with df.info Drop na values (todo: refactor this in pipeline) Create targets and remove from df  Bot or not v2 This is version 2 of the bot or not framework where we try to incorporate more features and try to put everything in a single pipeline." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.janmeppe.com/notes/machine_learning/cases/bot-or-not-v2/" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Idea parking space:
+ Extract features from URL  What I&rsquo;ve done so far:
+ Load in the data Inspect the data Look for unique values with (df.value_counts) Look for missing values with df.info Drop na values (todo: refactor this in pipeline) Create targets and remove from df  Bot or not v2 This is version 2 of the bot or not framework where we try to incorporate more features and try to put everything in a single pipeline."/>
+
+
+    
+    
+    
+
+    <title></title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.janmeppe.com/notes/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.janmeppe.com/notes/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Jan Meppe All Notes And Articles" />  
+    
+
+    
+    <link href="https://www.janmeppe.com/notes//articles/index.xml" rel="alternate" type="application/rss+xml" title="Jan Meppe Articles" />
+
+    <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.janmeppe.com/notes/">Jan Meppe</a>
+
+
+            
+
+
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+<article>
+  <div class="page">
+    <div class="content">
+      <p>Idea parking space:</p>
+<ul>
+<li>Extract features from URL</li>
+</ul>
+<p>What I&rsquo;ve done so far:</p>
+<ul>
+<li>Load in the data</li>
+<li>Inspect the data</li>
+<li>Look for unique values with (<code>df.value_counts</code>)</li>
+<li>Look for missing values with <code>df.info</code></li>
+<li>Drop na values (todo: refactor this in pipeline)</li>
+<li>Create targets and remove from df</li>
+</ul>
+<h1 id="bot-or-not-v2">Bot or not v2</h1>
+<p>This is version 2 of the bot or not framework where we try to incorporate more features and try to put everything in a single pipeline.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">TransformerMixin</span>
+</code></pre></div><h2 id="load-in-the-data">Load in the data</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">filename</span> <span class="o">=</span> <span class="s2">&#34;../../../data/bot-or-not-clickdata.csv&#34;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</code></pre></div><p>Data:</p>
+<ul>
+<li><code>epoch_ms</code></li>
+<li><code>session_id</code></li>
+<li><code>country_by_ip_address</code></li>
+<li><code>region_by_ip_address</code></li>
+<li><code>url_without_parameters</code></li>
+<li><code>referrer_without_parameters</code></li>
+<li><code>visitor_recognition_type</code></li>
+<li><code>ua_agent_class</code></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>epoch_ms</th>
+      <th>session_id</th>
+      <th>country_by_ip_address</th>
+      <th>region_by_ip_address</th>
+      <th>url_without_parameters</th>
+      <th>referrer_without_parameters</th>
+      <th>visitor_recognition_type</th>
+      <th>ua_agent_class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1520280001034</td>
+      <td>be73c8d1b836170a21529a1b23140f8e</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nederlandstalige-kuns...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1520280001590</td>
+      <td>c24c6637ed7dcbe19ad64056184212a7</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/italiaans-natuur-wete...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1520280002397</td>
+      <td>ee391655f5680a7bfae0019450aed396</td>
+      <td>IT</td>
+      <td>LI</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>ANONYMOUS</td>
+      <td>Browser</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1520280002598</td>
+      <td>f8c8a696dd37ca88233b2df096afa97f</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-engelstalige-o...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1520280004428</td>
+      <td>f8b0c06747b7dd1d53c0932306bd04d6</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-actie-avontuur...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot Mobile</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h1 id="preprocessing">Preprocessing</h1>
+<h2 id="drop-nans">Drop NaNs</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">mask</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;region_by_ip_address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+</code></pre></div><p>Let&rsquo;s check for missing data with <code>df.info()</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Int64Index: 49886 entries, 0 to 59780
+Data columns (total 8 columns):
+epoch_ms                       49886 non-null int64
+session_id                     49886 non-null object
+country_by_ip_address          49886 non-null object
+region_by_ip_address           49886 non-null object
+url_without_parameters         49886 non-null object
+referrer_without_parameters    12838 non-null object
+visitor_recognition_type       49886 non-null object
+ua_agent_class                 49886 non-null object
+dtypes: int64(1), object(7)
+memory usage: 3.4+ MB
+</code></pre>
+<p>We have some missing values in:</p>
+<ul>
+<li><code>country</code></li>
+<li><code>region</code></li>
+<li><code>referrer_without_parameters</code></li>
+</ul>
+<p>First come up with a very simple model.</p>
+<ul>
+<li>We drop the column <code>region_by_ip_address</code></li>
+<li>We drop the column <code>referrer_without_parameters</code></li>
+</ul>
+<h2 id="create-targetlabels">Create target/labels</h2>
+<p>Let&rsquo;s check what categories we have:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ua_agent_class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div><pre><code>Browser              26667
+Robot                15852
+Robot Mobile          5115
+Browser Webview       1454
+Hacker                 690
+Special                102
+Mobile App               4
+Cloud Application        2
+Name: ua_agent_class, dtype: int64
+</code></pre>
+<p>We turn these into labels by picking the right ones and adding a zero or one there.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">class_to_bot</span><span class="p">(</span><span class="n">agent</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">agent</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;Robot&#34;</span><span class="p">,</span> <span class="s2">&#34;Robot Mobile&#34;</span><span class="p">,</span> <span class="s2">&#34;Special&#34;</span><span class="p">,</span> <span class="s2">&#34;Cloud Application&#34;</span><span class="p">]:</span> 
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">0</span>
+    
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ua_agent_class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">class_to_bot</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>epoch_ms</th>
+      <th>session_id</th>
+      <th>country_by_ip_address</th>
+      <th>region_by_ip_address</th>
+      <th>url_without_parameters</th>
+      <th>referrer_without_parameters</th>
+      <th>visitor_recognition_type</th>
+      <th>ua_agent_class</th>
+      <th>target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1520280001034</td>
+      <td>be73c8d1b836170a21529a1b23140f8e</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nederlandstalige-kuns...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1520280001590</td>
+      <td>c24c6637ed7dcbe19ad64056184212a7</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/italiaans-natuur-wete...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1520280002397</td>
+      <td>ee391655f5680a7bfae0019450aed396</td>
+      <td>IT</td>
+      <td>LI</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>ANONYMOUS</td>
+      <td>Browser</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1520280002598</td>
+      <td>f8c8a696dd37ca88233b2df096afa97f</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-engelstalige-o...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1520280004428</td>
+      <td>f8b0c06747b7dd1d53c0932306bd04d6</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-actie-avontuur...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot Mobile</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ua_agent_class&#39;</span><span class="p">])</span>
+</code></pre></div><h1 id="feature-engineering">Feature engineering</h1>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span>
+</code></pre></div><pre><code>---------------------------------------------------------------------------
+
+KeyError                                  Traceback (most recent call last)
+
+/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
+   2656             try:
+-&gt; 2657                 return self._engine.get_loc(key)
+   2658             except KeyError:
+
+
+pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+KeyError: 'target'
+
+
+During handling of the above exception, another exception occurred:
+
+
+KeyError                                  Traceback (most recent call last)
+
+&lt;ipython-input-48-9fd451da30a0&gt; in &lt;module&gt;
+----&gt; 1 y = df.pop('target')
+      2 X = df
+
+
+/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/generic.py in pop(self, item)
+    807         3  monkey        NaN
+    808         &quot;&quot;&quot;
+--&gt; 809         result = self[item]
+    810         del self[item]
+    811         try:
+
+
+/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/frame.py in __getitem__(self, key)
+   2925             if self.columns.nlevels &gt; 1:
+   2926                 return self._getitem_multilevel(key)
+-&gt; 2927             indexer = self.columns.get_loc(key)
+   2928             if is_integer(indexer):
+   2929                 indexer = [indexer]
+
+
+/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
+   2657                 return self._engine.get_loc(key)
+   2658             except KeyError:
+-&gt; 2659                 return self._engine.get_loc(self._maybe_cast_indexer(key))
+   2660         indexer = self.get_indexer([key], method=method, tolerance=tolerance)
+   2661         if indexer.ndim &gt; 1 or indexer.size &gt; 1:
+
+
+pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+KeyError: 'target'
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>epoch_ms</th>
+      <th>session_id</th>
+      <th>country_by_ip_address</th>
+      <th>region_by_ip_address</th>
+      <th>url_without_parameters</th>
+      <th>referrer_without_parameters</th>
+      <th>visitor_recognition_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1520280001034</td>
+      <td>be73c8d1b836170a21529a1b23140f8e</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nederlandstalige-kuns...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1520280001590</td>
+      <td>c24c6637ed7dcbe19ad64056184212a7</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/italiaans-natuur-wete...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1520280002397</td>
+      <td>ee391655f5680a7bfae0019450aed396</td>
+      <td>IT</td>
+      <td>LI</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>ANONYMOUS</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1520280002598</td>
+      <td>f8c8a696dd37ca88233b2df096afa97f</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-engelstalige-o...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1520280004428</td>
+      <td>f8b0c06747b7dd1d53c0932306bd04d6</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-actie-avontuur...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">CustomTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">X_</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">FeatureSelector</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Transformer that selects a particular feature.&#34;&#34;&#34;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span>
+        
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+        
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">]</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">UrlLength</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+        
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">])</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">FeatureUnion</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">url_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;selector&#39;</span><span class="p">,</span> <span class="n">FeatureSelector</span><span class="p">([</span><span class="s1">&#39;url_without_parameters&#39;</span><span class="p">])),</span>
+    <span class="p">(</span><span class="s2">&#34;length&#34;</span><span class="p">,</span> <span class="n">UrlLength</span><span class="p">(</span><span class="s1">&#39;url_without_parameters&#39;</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">url_pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div><pre><code>49886
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;epoch_ms&#39;</span><span class="p">,</span> <span class="s1">&#39;session_id&#39;</span><span class="p">,</span> <span class="s1">&#39;region_by_ip_address&#39;</span><span class="p">,</span> <span class="s1">&#39;referrer_without_parameters&#39;</span><span class="p">,</span> <span class="s1">&#39;url_without_parameters&#39;</span><span class="p">])</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_by_ip_address</th>
+      <th>visitor_recognition_type</th>
+      <th>ua_agent_class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>IT</td>
+      <td>ANONYMOUS</td>
+      <td>Browser</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot Mobile</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h1 id="prepare-data-for-ml-algorithm">Prepare data for ML algorithm</h1>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;ohe&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)),</span> 
+    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="p">])</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div><pre><code>Pipeline(memory=None,
+         steps=[('ohe',
+                 OneHotEncoder(categorical_features=None, categories=None,
+                               drop=None, dtype=&lt;class 'numpy.float64'&gt;,
+                               handle_unknown='ignore', n_values=None,
+                               sparse=True)),
+                ('clf',
+                 RandomForestClassifier(bootstrap=True, class_weight=None,
+                                        criterion='gini', max_depth=None,
+                                        max_features='auto',
+                                        max_leaf_nodes=None,
+                                        min_impurity_decrease=0.0,
+                                        min_impurity_split=None,
+                                        min_samples_leaf=1, min_samples_split=2,
+                                        min_weight_fraction_leaf=0.0,
+                                        n_estimators=10, n_jobs=None,
+                                        oob_score=False, random_state=None,
+                                        verbose=0, warm_start=False))],
+         verbose=False)
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">train_acc</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">test_acc</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;Accuracy on train set:&#34;</span><span class="p">,</span> <span class="n">train_acc</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Accuracy on test set:&#34;</span><span class="p">,</span> <span class="n">test_acc</span><span class="p">)</span>
+</code></pre></div><pre><code>Accuracy on train set: 0.959077892325315
+Accuracy on test set: 0.9573032206334358
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div>
+    </div>
+  </div>
+</article>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">All 42 notes and articles are available on <a href="https://github.com/Rainymood/notes">GitHub</a>. Made with ❤️ by <a href="https://www.janmeppe.com/">Jan Meppe</a>, inspired by <a href="https://chrisalbon.com/">Chris Albon</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

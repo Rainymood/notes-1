@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66582-32"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-66582-32');
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Create simulated data for regression" />
+<meta property="og:description" content="Create simulated data for regression" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.janmeppe.com/notes/machine_learning/basics/create_simulated_data_for_regression/" />
+<meta property="article:published_time" content="2021-04-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-09T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Create simulated data for regression"/>
+<meta name="twitter:description" content="Create simulated data for regression"/>
+
+
+    
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Create simulated data for regression",
+  "url": "https:\/\/www.janmeppe.com\/notes\/machine_learning\/basics\/create_simulated_data_for_regression\/",
+  "wordCount": "321",
+  "datePublished": "2021-04-09T00:00:00\u002b00:00",
+  "dateModified": "2021-04-09T00:00:00\u002b00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jan Meppe"
+  },
+  "description": "Create simulated data for regression"
+}
+</script> 
+
+    <title>Create simulated data for regression</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.janmeppe.com/notes/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.janmeppe.com/notes/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Jan Meppe All Notes And Articles" />  
+    
+
+    
+    <link href="https://www.janmeppe.com/notes//articles/index.xml" rel="alternate" type="application/rss+xml" title="Jan Meppe Articles" />
+
+    <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.janmeppe.com/notes/">Jan Meppe</a>
+
+
+            
+
+
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                 
+
+
+<article>
+  <div class="technical_note">
+  <header>
+      
+    <h1 class="technical_note_title">Create simulated data for regression</h1>
+    <div class="technical_note_date">
+      <time datetime=" 2021-04-09T00:00:00Z "> 09 Apr 2021</time>
+    </div>
+  </header>
+  <div class="content">
+      
+  <h1 id="creating-simulated-data-for-regression">Creating simulated data for regression</h1>
+<p>Generate a problem set for regression with <code>make_regression</code>.</p>
+<h2 id="imports">Imports</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+</code></pre></div><h2 id="create-data">Create data</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">coeff</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
+                              <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
+                              <span class="n">noise</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                              <span class="n">coef</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div><h2 id="view-data">View data</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">X</span>
+</code></pre></div><pre><code>array([[ 0.39342141],
+       [-0.29941625],
+       [ 0.8270667 ],
+       [-0.36925149],
+       [ 0.14036599],
+       [-0.86022152],
+       [-0.23233681],
+       [ 2.37128331],
+       [-0.67873926],
+       [-0.29949625],
+       [-0.90195881],
+       [-1.28719771],
+       [-1.26405413],
+       [ 0.27266678],
+       [ 0.16784455],
+       [-0.20048219],
+       [-1.42941065],
+       [ 0.60842469],
+       [-0.48417899],
+       [-1.36679132],
+       [ 0.09715774],
+       [-0.45187975],
+       [-2.74788733],
+       [ 0.50279895],
+       [-1.70296415],
+       [ 1.04227415],
+       [ 0.87418641],
+       [-1.63767289],
+       [-0.17883147],
+       [ 0.6544535 ],
+       [ 0.93920948],
+       [ 1.41625768],
+       [-2.23795933],
+       [-0.70319305],
+       [ 0.53609476],
+       [-1.1837513 ],
+       [-0.87942076],
+       [-0.20788573],
+       [ 0.06744645],
+       [-0.31599136],
+       [-0.37554173],
+       [-0.66007778],
+       [ 1.40581074],
+       [ 0.34448309],
+       [-0.24001123],
+       [-0.2200162 ],
+       [-0.87320706],
+       [ 0.52054898],
+       [ 1.79042077],
+       [-1.23654716],
+       [ 1.53065345],
+       [ 1.40074436],
+       [-1.30935746],
+       [ 0.24672444],
+       [ 0.41158459],
+       [ 0.2666237 ],
+       [-1.61525001],
+       [-0.94003684],
+       [ 1.16244022],
+       [ 0.26409889],
+       [ 0.39582731],
+       [ 0.93959662],
+       [-1.89957875],
+       [-0.0268127 ],
+       [ 0.62403731],
+       [ 0.78333234],
+       [ 0.20812531],
+       [-0.93339354],
+       [-0.3416054 ],
+       [-3.34341589],
+       [-0.4490694 ],
+       [ 2.51815549],
+       [ 0.8560637 ],
+       [-1.25976968],
+       [-0.29623853],
+       [-0.97449571],
+       [ 0.45095422],
+       [ 0.23361083],
+       [ 0.63572959],
+       [-1.18904987],
+       [-1.62312091],
+       [ 0.23525692],
+       [-0.73648408],
+       [ 0.33771802],
+       [-0.23952252],
+       [-1.08665533],
+       [-0.73657066],
+       [ 0.03183842],
+       [-0.79909607],
+       [ 0.49188479],
+       [-1.07922436],
+       [-0.55107552],
+       [-0.21886975],
+       [ 0.73425651],
+       [ 1.18220907],
+       [-0.6644963 ],
+       [ 1.75971429],
+       [-0.98564451],
+       [-0.40700772],
+       [-0.62972912]])
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div><pre><code>(100, 1)
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">y</span>
+</code></pre></div><pre><code>array([  9.52675132,  -7.44053638,  32.72300661,   4.13392985,
+         2.22081655, -12.43992078,  -6.74737513,  47.03512971,
+         8.05278114,   4.4100269 , -21.75723864, -28.19087162,
+       -27.30228217,   8.03115452, -30.70515569,  14.26893093,
+       -18.48318312,  20.23959115,  -1.89348799, -32.85311853,
+         9.02327361,  -9.03597214, -51.48520918,  10.85614552,
+       -14.03085247,  28.29871714,  32.87952785, -37.19885382,
+         4.99852428,  18.65202551,  15.44131029,  45.93415477,
+       -35.76999645, -24.19221215,  11.24014351, -28.46624889,
+       -12.86945945,  -3.91798659,   7.9360016 ,  -7.52129667,
+       -19.39114384, -18.99245333,  27.58782283,   3.41362704,
+        -5.17613676,  -3.40044047, -39.65840176,   9.54472686,
+        26.43818408, -23.2721936 ,  11.18891267,  22.93804112,
+       -29.53186157,  -9.23921842,   9.18505467,  -4.92061854,
+       -43.06232161, -32.47801339,  22.4176157 ,  -8.92589108,
+        21.44810676,  22.18065965, -42.56378797, -13.92420216,
+         0.46654487,  13.05829701,  21.54980895, -18.95884615,
+        12.88461808, -57.88780707,  -5.01774171,  50.55812623,
+         2.40305008, -43.19803023, -25.47628618, -16.03072861,
+        10.10623725,   0.43790824,   2.47232427, -25.97494282,
+       -31.84473229,   3.99237653, -11.92112629,  -1.74782567,
+        -5.5563537 , -13.02237772, -16.81083233,   4.93431145,
+       -19.36375729,  -2.25742877,  -7.46117928, -23.01622975,
+        -2.64262801,  20.58439967,  12.85242949, -27.5873534 ,
+        47.75043848, -18.80269135, -23.4548954 , -11.21394415])
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div><pre><code>(100,)
+</code></pre>
+<h2 id="plot-data">Plot data</h2>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div><p><img src="Create_simulated_data_for_regression_12_0.png" alt="png"></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div>
+</div>
+  <aside>
+      <div class="bug_reporting">
+          <h4>Find an error or bug?</h4>
+          <p>Everything on this site is available on GitHub. Head to <a href='https://github.com/chrisalbon/notes/issues/new'>and submit a suggested change</a>. Include the tutorial's URL in the issue.</p>
+      </div>
+      </aside>
+
+    </div>
+</article>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">All 42 notes and articles are available on <a href="https://github.com/Rainymood/notes">GitHub</a>. Made with ❤️ by <a href="https://www.janmeppe.com/">Jan Meppe</a>, inspired by <a href="https://chrisalbon.com/">Chris Albon</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

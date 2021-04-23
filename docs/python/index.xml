@@ -1,0 +1,41 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python - Jan Meppe</title>
+    <link>https://www.janmeppe.com/notes/python/index.xml</link>
+    <description></description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Apr 2021 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.janmeppe.com/notes/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Count items in list</title>
+      <link>https://www.janmeppe.com/notes/python/basics/count_items_list/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/python/basics/count_items_list/</guid>
+      <description>Create data items = [&amp;#39;orange&amp;#39;, &amp;#39;banana&amp;#39;, &amp;#39;orange&amp;#39;, &amp;#39;fruit&amp;#39;] Count items in list items.count(&amp;#39;orange&amp;#39;) 2  </description>
+    </item>
+    
+    <item>
+      <title>Create count items in list</title>
+      <link>https://www.janmeppe.com/notes/python/basics/create_count_items_list/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/python/basics/create_count_items_list/</guid>
+      <description>Imports from collections import Counter Create count # Create count for items in list counter = Counter([&amp;#39;orange&amp;#39;, &amp;#39;banana&amp;#39;, &amp;#39;orange&amp;#39;, &amp;#39;fruit&amp;#39;]) # View counter counter Counter({&#39;orange&#39;: 2, &#39;banana&#39;: 1, &#39;fruit&#39;: 1})  </description>
+    </item>
+    
+    <item>
+      <title>Sum items list</title>
+      <link>https://www.janmeppe.com/notes/python/basics/sum_items_list/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/python/basics/sum_items_list/</guid>
+      <description>Create data items = [1, 2, 3, 4, 5] Sum items in list sum(items) 15  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66582-32"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-66582-32');
+    </script>
+
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="Idea parking space:
+ Extract features from URL  What I&rsquo;ve done so far:
+ Load in the data Inspect the data Look for unique values with (df.value_counts) Look for missing values with df.info Drop na values (todo: refactor this in pipeline) Create targets and remove from df  import pandas as pd import numpy as np import os filename = &#34;../../../data/bot-or-not-clickdata.csv&#34; df = pd.read_csv(filename) Data:
+ epoch_ms session_id country_by_ip_address region_by_ip_address url_without_parameters referrer_without_parameters visitor_recognition_type ua_agent_class  df." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.janmeppe.com/notes/machine_learning/cases/bot-or-not-v1/" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Idea parking space:
+ Extract features from URL  What I&rsquo;ve done so far:
+ Load in the data Inspect the data Look for unique values with (df.value_counts) Look for missing values with df.info Drop na values (todo: refactor this in pipeline) Create targets and remove from df  import pandas as pd import numpy as np import os filename = &#34;../../../data/bot-or-not-clickdata.csv&#34; df = pd.read_csv(filename) Data:
+ epoch_ms session_id country_by_ip_address region_by_ip_address url_without_parameters referrer_without_parameters visitor_recognition_type ua_agent_class  df."/>
+
+
+    
+    
+    
+
+    <title></title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+    
+    <link href="https://www.janmeppe.com/notes/css/custom.css" rel="stylesheet"> 
+    <link href="https://www.janmeppe.com/notes/css/syntax.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,500,700" rel="stylesheet">
+
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="Jan Meppe All Notes And Articles" />  
+    
+
+    
+    <link href="https://www.janmeppe.com/notes//articles/index.xml" rel="alternate" type="application/rss+xml" title="Jan Meppe Articles" />
+
+    <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.janmeppe.com/notes/">Jan Meppe</a>
+
+
+            
+
+
+        </div>
+    </nav>
+
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                
+<article>
+  <div class="page">
+    <div class="content">
+      <p>Idea parking space:</p>
+<ul>
+<li>Extract features from URL</li>
+</ul>
+<p>What I&rsquo;ve done so far:</p>
+<ul>
+<li>Load in the data</li>
+<li>Inspect the data</li>
+<li>Look for unique values with (<code>df.value_counts</code>)</li>
+<li>Look for missing values with <code>df.info</code></li>
+<li>Drop na values (todo: refactor this in pipeline)</li>
+<li>Create targets and remove from df</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">filename</span> <span class="o">=</span> <span class="s2">&#34;../../../data/bot-or-not-clickdata.csv&#34;</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</code></pre></div><p>Data:</p>
+<ul>
+<li><code>epoch_ms</code></li>
+<li><code>session_id</code></li>
+<li><code>country_by_ip_address</code></li>
+<li><code>region_by_ip_address</code></li>
+<li><code>url_without_parameters</code></li>
+<li><code>referrer_without_parameters</code></li>
+<li><code>visitor_recognition_type</code></li>
+<li><code>ua_agent_class</code></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>epoch_ms</th>
+      <th>session_id</th>
+      <th>country_by_ip_address</th>
+      <th>region_by_ip_address</th>
+      <th>url_without_parameters</th>
+      <th>referrer_without_parameters</th>
+      <th>visitor_recognition_type</th>
+      <th>ua_agent_class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1520280001034</td>
+      <td>be73c8d1b836170a21529a1b23140f8e</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nederlandstalige-kuns...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1520280001590</td>
+      <td>c24c6637ed7dcbe19ad64056184212a7</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/italiaans-natuur-wete...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1520280002397</td>
+      <td>ee391655f5680a7bfae0019450aed396</td>
+      <td>IT</td>
+      <td>LI</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>https://www.bol.com/nl/p/nespresso-magimix-ini...</td>
+      <td>ANONYMOUS</td>
+      <td>Browser</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1520280002598</td>
+      <td>f8c8a696dd37ca88233b2df096afa97f</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-engelstalige-o...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1520280004428</td>
+      <td>f8b0c06747b7dd1d53c0932306bd04d6</td>
+      <td>US</td>
+      <td>CA</td>
+      <td>https://www.bol.com/nl/l/nieuwe-actie-avontuur...</td>
+      <td>NaN</td>
+      <td>ANONYMOUS</td>
+      <td>Robot Mobile</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">mask</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;region_by_ip_address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span>
+</code></pre></div><p>Let&rsquo;s check for missing data with <code>df.info()</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Int64Index: 49886 entries, 0 to 59780
+Data columns (total 8 columns):
+epoch_ms                       49886 non-null int64
+session_id                     49886 non-null object
+country_by_ip_address          49886 non-null object
+region_by_ip_address           49886 non-null object
+url_without_parameters         49886 non-null object
+referrer_without_parameters    12838 non-null object
+visitor_recognition_type       49886 non-null object
+ua_agent_class                 49886 non-null object
+dtypes: int64(1), object(7)
+memory usage: 3.4+ MB
+</code></pre>
+<p>We have some missing values in:</p>
+<ul>
+<li><code>country</code></li>
+<li><code>region</code></li>
+<li><code>referrer_without_parameters</code></li>
+</ul>
+<p>First come up with a very simple model.</p>
+<ul>
+<li>We drop the column <code>region_by_ip_address</code></li>
+<li>We drop the column <code>referrer_without_parameters</code></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;epoch_ms&#39;</span><span class="p">,</span> <span class="s1">&#39;session_id&#39;</span><span class="p">,</span> <span class="s1">&#39;region_by_ip_address&#39;</span><span class="p">,</span> <span class="s1">&#39;referrer_without_parameters&#39;</span><span class="p">,</span> <span class="s1">&#39;url_without_parameters&#39;</span><span class="p">])</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country_by_ip_address</th>
+      <th>visitor_recognition_type</th>
+      <th>ua_agent_class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>IT</td>
+      <td>ANONYMOUS</td>
+      <td>Browser</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>US</td>
+      <td>ANONYMOUS</td>
+      <td>Robot Mobile</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h1 id="construct-target-label">Construct target label</h1>
+<p>Gaan we eerst kijken welke categorieen er in zitten <code>ua_agent_class</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ua_agent_class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div><pre><code>Browser              26667
+Robot                15852
+Robot Mobile          5115
+Browser Webview       1454
+Hacker                 690
+Special                102
+Mobile App               4
+Cloud Application        2
+Name: ua_agent_class, dtype: int64
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">class_to_bot</span><span class="p">(</span><span class="n">agent</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">agent</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;Robot&#34;</span><span class="p">,</span> <span class="s2">&#34;Robot Mobile&#34;</span><span class="p">,</span> <span class="s2">&#34;Special&#34;</span><span class="p">,</span> <span class="s2">&#34;Cloud Application&#34;</span><span class="p">]:</span> 
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">0</span>
+    
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ua_agent_class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">class_to_bot</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ua_agent_class&#39;</span><span class="p">])</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">)</span>
+</code></pre></div><h1 id="construct-x-variables">Construct X variables</h1>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;ohe&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)),</span> 
+    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="p">])</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div><pre><code>Pipeline(memory=None,
+         steps=[('ohe',
+                 OneHotEncoder(categorical_features=None, categories=None,
+                               drop=None, dtype=&lt;class 'numpy.float64'&gt;,
+                               handle_unknown='ignore', n_values=None,
+                               sparse=True)),
+                ('clf',
+                 RandomForestClassifier(bootstrap=True, class_weight=None,
+                                        criterion='gini', max_depth=None,
+                                        max_features='auto',
+                                        max_leaf_nodes=None,
+                                        min_impurity_decrease=0.0,
+                                        min_impurity_split=None,
+                                        min_samples_leaf=1, min_samples_split=2,
+                                        min_weight_fraction_leaf=0.0,
+                                        n_estimators=10, n_jobs=None,
+                                        oob_score=False, random_state=None,
+                                        verbose=0, warm_start=False))],
+         verbose=False)
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">train_acc</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">test_acc</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;Accuracy on train set:&#34;</span><span class="p">,</span> <span class="n">train_acc</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Accuracy on test set:&#34;</span><span class="p">,</span> <span class="n">test_acc</span><span class="p">)</span>
+</code></pre></div><pre><code>Accuracy on train set: 0.959077892325315
+Accuracy on test set: 0.9573032206334358
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+</code></pre></div><p>First we view the parameters with pipeline <code>params()</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pipe</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+</code></pre></div><pre><code>{'memory': None,
+ 'steps': [('ohe',
+   OneHotEncoder(categorical_features=None, categories=None, drop=None,
+                 dtype=&lt;class 'numpy.float64'&gt;, handle_unknown='ignore',
+                 n_values=None, sparse=True)),
+  ('clf',
+   RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+                          max_depth=None, max_features='auto', max_leaf_nodes=None,
+                          min_impurity_decrease=0.0, min_impurity_split=None,
+                          min_samples_leaf=1, min_samples_split=2,
+                          min_weight_fraction_leaf=0.0, n_estimators=10,
+                          n_jobs=None, oob_score=False, random_state=None,
+                          verbose=0, warm_start=False))],
+ 'verbose': False,
+ 'ohe': OneHotEncoder(categorical_features=None, categories=None, drop=None,
+               dtype=&lt;class 'numpy.float64'&gt;, handle_unknown='ignore',
+               n_values=None, sparse=True),
+ 'clf': RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+                        max_depth=None, max_features='auto', max_leaf_nodes=None,
+                        min_impurity_decrease=0.0, min_impurity_split=None,
+                        min_samples_leaf=1, min_samples_split=2,
+                        min_weight_fraction_leaf=0.0, n_estimators=10,
+                        n_jobs=None, oob_score=False, random_state=None,
+                        verbose=0, warm_start=False),
+ 'ohe__categorical_features': None,
+ 'ohe__categories': None,
+ 'ohe__drop': None,
+ 'ohe__dtype': numpy.float64,
+ 'ohe__handle_unknown': 'ignore',
+ 'ohe__n_values': None,
+ 'ohe__sparse': True,
+ 'clf__bootstrap': True,
+ 'clf__class_weight': None,
+ 'clf__criterion': 'gini',
+ 'clf__max_depth': None,
+ 'clf__max_features': 'auto',
+ 'clf__max_leaf_nodes': None,
+ 'clf__min_impurity_decrease': 0.0,
+ 'clf__min_impurity_split': None,
+ 'clf__min_samples_leaf': 1,
+ 'clf__min_samples_split': 2,
+ 'clf__min_weight_fraction_leaf': 0.0,
+ 'clf__n_estimators': 10,
+ 'clf__n_jobs': None,
+ 'clf__oob_score': False,
+ 'clf__random_state': None,
+ 'clf__verbose': 0,
+ 'clf__warm_start': False}
+</code></pre>
+<h1 id="gridsearch">Gridsearch</h1>
+<p>We decide to iterate over <code>min_samples_split</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;clf__min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Make sure to enable return train score!!</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div><pre><code>/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/sklearn/model_selection/_split.py:1978: FutureWarning: The default value of cv will change from 3 to 5 in version 0.22. Specify it explicitly to silence this warning.
+  warnings.warn(CV_WARNING, FutureWarning)
+
+
+
+
+
+GridSearchCV(cv='warn', error_score='raise-deprecating',
+             estimator=Pipeline(memory=None,
+                                steps=[('ohe',
+                                        OneHotEncoder(categorical_features=None,
+                                                      categories=None,
+                                                      drop=None,
+                                                      dtype=&lt;class 'numpy.float64'&gt;,
+                                                      handle_unknown='ignore',
+                                                      n_values=None,
+                                                      sparse=True)),
+                                       ('clf',
+                                        RandomForestClassifier(bootstrap=True,
+                                                               class_weight=None,
+                                                               criterion='gini',
+                                                               max_depth=None,
+                                                               max_feat...
+                                                               min_impurity_split=None,
+                                                               min_samples_leaf=1,
+                                                               min_samples_split=2,
+                                                               min_weight_fraction_leaf=0.0,
+                                                               n_estimators=10,
+                                                               n_jobs=None,
+                                                               oob_score=False,
+                                                               random_state=None,
+                                                               verbose=0,
+                                                               warm_start=False))],
+                                verbose=False),
+             iid='warn', n_jobs=None,
+             param_grid={'clf__min_samples_split': [2, 5, 10, 20, 50, 100, 200,
+                                                    300]},
+             pre_dispatch='2*n_jobs', refit=True, return_train_score=True,
+             scoring=None, verbose=0)
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span>
+</code></pre></div><pre><code>{'mean_fit_time': array([0.08140779, 0.0723687 , 0.07732868, 0.07200956, 0.07382631,
+        0.07346471, 0.07426643, 0.07048337]),
+ 'std_fit_time': array([0.00828772, 0.00155878, 0.00283014, 0.00098001, 0.00078882,
+        0.003388  , 0.00665328, 0.00153472]),
+ 'mean_score_time': array([0.02136421, 0.01732802, 0.01892432, 0.01760372, 0.01804161,
+        0.01736848, 0.01846957, 0.0179704 ]),
+ 'std_score_time': array([0.00268588, 0.0005123 , 0.0013419 , 0.00027283, 0.00063057,
+        0.00024499, 0.00161849, 0.00074996]),
+ 'param_clf__min_samples_split': masked_array(data=[2, 5, 10, 20, 50, 100, 200, 300],
+              mask=[False, False, False, False, False, False, False, False],
+        fill_value='?',
+             dtype=object),
+ 'params': [{'clf__min_samples_split': 2},
+  {'clf__min_samples_split': 5},
+  {'clf__min_samples_split': 10},
+  {'clf__min_samples_split': 20},
+  {'clf__min_samples_split': 50},
+  {'clf__min_samples_split': 100},
+  {'clf__min_samples_split': 200},
+  {'clf__min_samples_split': 300}],
+ 'split0_test_score': array([0.95867698, 0.95867698, 0.95867698, 0.95867698, 0.95867698,
+        0.95867698, 0.95867698, 0.95867698]),
+ 'split1_test_score': array([0.96091065, 0.96082474, 0.96082474, 0.96082474, 0.96082474,
+        0.96091065, 0.96082474, 0.96082474]),
+ 'split2_test_score': array([0.95756014, 0.95764605, 0.95756014, 0.95764605, 0.95764605,
+        0.95764605, 0.95756014, 0.95756014]),
+ 'mean_test_score': array([0.95904926, 0.95904926, 0.95902062, 0.95904926, 0.95904926,
+        0.95907789, 0.95902062, 0.95902062]),
+ 'std_test_score': array([0.00139294, 0.00132413, 0.00135474, 0.00132413, 0.00132413,
+        0.00136259, 0.00135474, 0.00135474]),
+ 'rank_test_score': array([2, 2, 6, 2, 2, 1, 6, 6], dtype=int32),
+ 'split0_train_score': array([0.95927835, 0.95927835, 0.95927835, 0.95927835, 0.95927835,
+        0.95927835, 0.95927835, 0.95919244]),
+ 'split1_train_score': array([0.95816151, 0.95811856, 0.95811856, 0.95811856, 0.95811856,
+        0.95816151, 0.95811856, 0.95811856]),
+ 'split2_train_score': array([0.95975086, 0.95979381, 0.95975086, 0.95979381, 0.95979381,
+        0.95979381, 0.95975086, 0.95975086]),
+ 'mean_train_score': array([0.95906357, 0.95906357, 0.95904926, 0.95906357, 0.95906357,
+        0.95907789, 0.95904926, 0.95902062]),
+ 'std_train_score': array([0.00066638, 0.00070058, 0.00068579, 0.00070058, 0.00070058,
+        0.00068129, 0.00068579, 0.00067737])}
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">results</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">cv_results_</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;GridSearchCV evaluating min_samples_split&#34;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;min_samples_split&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;Score&#34;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>  <span class="c1"># set to min value of param grid</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.90</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># accuracy from 0 to 1</span>
+
+<span class="c1"># Get the X_values from regular numpy array from the MaskedArray</span>
+<span class="n">X_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&#34;param_clf__min_samples_split&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># For train/test</span>
+<span class="k">for</span> <span class="n">sample</span><span class="p">,</span> <span class="n">style</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">&#34;train&#34;</span><span class="p">,</span> <span class="s2">&#34;--&#34;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&#34;test&#34;</span><span class="p">,</span> <span class="s2">&#34;-&#34;</span><span class="p">)):</span>
+    <span class="c1"># Grab results from </span>
+    <span class="n">sample_score_mean</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&#34;mean_</span><span class="si">%s</span><span class="s2">_score&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sample</span><span class="p">)]</span>
+    <span class="n">sample_score_std</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&#34;std_</span><span class="si">%s</span><span class="s2">_score&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sample</span><span class="p">)]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sample score mean&#34;</span><span class="p">,</span> <span class="n">sample_score_mean</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Sample score std&#34;</span><span class="p">,</span> <span class="n">sample_score_std</span><span class="p">)</span>
+    
+    <span class="c1"># Fill between</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+        <span class="n">X_axis</span><span class="p">,</span>
+        <span class="n">sample_score_mean</span> <span class="o">-</span> <span class="n">sample_score_std</span><span class="p">,</span>
+        <span class="n">sample_score_mean</span> <span class="o">+</span> <span class="n">sample_score_std</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span> <span class="k">if</span> <span class="n">sample</span> <span class="o">==</span> <span class="s2">&#34;test&#34;</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">X_axis</span><span class="p">,</span>
+        <span class="n">sample_score_mean</span><span class="p">,</span>
+        <span class="n">style</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">sample</span> <span class="o">==</span> <span class="s2">&#34;test&#34;</span> <span class="k">else</span> <span class="mf">0.7</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sample</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="c1"># best_index = np.nonzero(results[&#39;rank_test_%s&#39; % scorer] == 1)[0][0]</span>
+<span class="c1"># best_score = results[&#39;mean_test_%s&#39; % scorer][best_index]</span>
+
+<span class="c1"># # Plot a dotted vertical line at the best score for that scorer marked by x</span>
+<span class="c1"># ax.plot([X_axis[best_index], ] * 2, [0, best_score],</span>
+<span class="c1">#         linestyle=&#39;-.&#39;, color=color, marker=&#39;x&#39;, markeredgewidth=3, ms=8)</span>
+
+<span class="c1"># # Annotate the best score for that scorer</span>
+<span class="c1"># ax.annotate(&#34;%0.2f&#34; % best_score,</span>
+<span class="c1">#             (X_axis[best_index], best_score + 0.005))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&#34;best&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div><pre><code>Sample score mean [0.95906357 0.95906357 0.95904926 0.95906357 0.95906357 0.95907789
+ 0.95904926 0.95902062]
+Sample score std [0.00066638 0.00070058 0.00068579 0.00070058 0.00070058 0.00068129
+ 0.00068579 0.00067737]
+Sample score mean [0.95904926 0.95904926 0.95902062 0.95904926 0.95904926 0.95907789
+ 0.95902062 0.95902062]
+Sample score std [0.00139294 0.00132413 0.00135474 0.00132413 0.00132413 0.00136259
+ 0.00135474 0.00135474]
+</code></pre>
+<p><img src="bot%20or%20not%20v1_37_1.png" alt="png"></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">learning_curve</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">ShuffleSplit</span>
+
+
+<span class="k">def</span> <span class="nf">plot_learning_curve</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">axes</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">train_sizes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+<span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Generate 1 plots: the test and training learning curve
+</span><span class="s2">
+</span><span class="s2">    Parameters
+</span><span class="s2">    ----------
+</span><span class="s2">    estimator : estimator instance
+</span><span class="s2">        An estimator instance implementing `fit` and `predict` methods which
+</span><span class="s2">        will be cloned for each validation.
+</span><span class="s2">
+</span><span class="s2">    title : str
+</span><span class="s2">        Title for the chart.
+</span><span class="s2">
+</span><span class="s2">    X : array-like of shape (n_samples, n_features)
+</span><span class="s2">        Training vector, where ``n_samples`` is the number of samples and
+</span><span class="s2">        ``n_features`` is the number of features.
+</span><span class="s2">
+</span><span class="s2">    y : array-like of shape (n_samples) or (n_samples, n_features)
+</span><span class="s2">        Target relative to ``X`` for classification or regression;
+</span><span class="s2">        None for unsupervised learning.
+</span><span class="s2">
+</span><span class="s2">    axes : array-like of shape (1,), default=None
+</span><span class="s2">        Axes to use for plotting the curves.
+</span><span class="s2">
+</span><span class="s2">    ylim : tuple of shape (2,), default=None
+</span><span class="s2">        Defines minimum and maximum y-values plotted, e.g. (ymin, ymax).
+</span><span class="s2">
+</span><span class="s2">    cv : int, cross-validation generator or an iterable, default=None
+</span><span class="s2">        Determines the cross-validation splitting strategy.
+</span><span class="s2">        Possible inputs for cv are:
+</span><span class="s2">
+</span><span class="s2">          - None, to use the default 5-fold cross-validation,
+</span><span class="s2">          - integer, to specify the number of folds.
+</span><span class="s2">          - :term:`CV splitter`,
+</span><span class="s2">          - An iterable yielding (train, test) splits as arrays of indices.
+</span><span class="s2">
+</span><span class="s2">        For integer/None inputs, if ``y`` is binary or multiclass,
+</span><span class="s2">        :class:`StratifiedKFold` used. If the estimator is not a classifier
+</span><span class="s2">        or if ``y`` is neither binary nor multiclass, :class:`KFold` is used.
+</span><span class="s2">
+</span><span class="s2">        Refer :ref:`User Guide &lt;cross_validation&gt;` for the various
+</span><span class="s2">        cross-validators that can be used here.
+</span><span class="s2">
+</span><span class="s2">    n_jobs : int or None, default=None
+</span><span class="s2">        Number of jobs to run in parallel.
+</span><span class="s2">        ``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.
+</span><span class="s2">        ``-1`` means using all processors. See :term:`Glossary &lt;n_jobs&gt;`
+</span><span class="s2">        for more details.
+</span><span class="s2">
+</span><span class="s2">    train_sizes : array-like of shape (n_ticks,)
+</span><span class="s2">        Relative or absolute numbers of training examples that will be used to
+</span><span class="s2">        generate the learning curve. If the ``dtype`` is float, it is regarded
+</span><span class="s2">        as a fraction of the maximum size of the training set (that is
+</span><span class="s2">        determined by the selected validation method), i.e. it has to be within
+</span><span class="s2">        (0, 1]. Otherwise it is interpreted as absolute sizes of the training
+</span><span class="s2">        sets. Note that for classification the number of samples usually have
+</span><span class="s2">        to be big enough to contain at least one sample from each class.
+</span><span class="s2">        (default: np.linspace(0.1, 1.0, 5))
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="c1"># If we don&#39;t pass an axes object, make your own</span>
+    <span class="k">if</span> <span class="n">axes</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+    <span class="c1"># Set title, ylim, xlabel, and ylabel</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">*</span><span class="n">ylim</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&#34;Training examples&#34;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&#34;Score&#34;</span><span class="p">)</span>
+
+    <span class="c1"># Get train_sizes (x-values), train_scores (y-values), and test_scores (y-values)</span>
+    <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">test_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+        <span class="n">estimator</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">train_sizes</span><span class="o">=</span><span class="n">train_sizes</span>
+    <span class="p">)</span>
+    <span class="c1"># Calculate the mean and std</span>
+    <span class="n">train_scores_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_scores_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">train_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_scores_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_scores_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">test_scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Plot areas</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="c1"># Plot area for test</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+        <span class="n">train_sizes</span><span class="p">,</span>
+        <span class="n">train_scores_mean</span> <span class="o">-</span> <span class="n">train_scores_std</span><span class="p">,</span>
+        <span class="n">train_scores_mean</span> <span class="o">+</span> <span class="n">train_scores_std</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;r&#34;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Plot area for test</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+        <span class="n">train_sizes</span><span class="p">,</span>
+        <span class="n">test_scores_mean</span> <span class="o">-</span> <span class="n">test_scores_std</span><span class="p">,</span>
+        <span class="n">test_scores_mean</span> <span class="o">+</span> <span class="n">test_scores_std</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;g&#34;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Plot the lines for train</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores_mean</span><span class="p">,</span> <span class="s2">&#34;o-&#34;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;r&#34;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Training score&#34;</span><span class="p">)</span>
+    <span class="c1"># Plot line for test</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">train_sizes</span><span class="p">,</span> <span class="n">test_scores_mean</span><span class="p">,</span> <span class="s2">&#34;o-&#34;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;g&#34;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Cross-validation score&#34;</span>
+    <span class="p">)</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&#34;best&#34;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">plt</span>
+
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Learning Curves (Naive Bayes)&#34;</span>
+<span class="c1"># Cross validation with 100 iterations to get smoother mean test and train</span>
+<span class="c1"># score curves, each time with 20% data randomly selected as a validation set.</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">plot_learning_curve</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">),</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div><p><img src="bot%20or%20not%20v1_39_0.png" alt="png"></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Learning Curves (Random Forest)&#34;</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plot_learning_curve</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">),</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div><p><img src="bot%20or%20not%20v1_40_0.png" alt="png"></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div><pre><code>(1797, 64)
+</code></pre>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+</code></pre></div>
+    </div>
+  </div>
+</article>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    <footer class="footer text-center">
+        <div class="container">
+            <span class="text-muted">All 42 notes and articles are available on <a href="https://github.com/Rainymood/notes">GitHub</a>. Made with ❤️ by <a href="https://www.janmeppe.com/">Jan Meppe</a>, inspired by <a href="https://chrisalbon.com/">Chris Albon</a></span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

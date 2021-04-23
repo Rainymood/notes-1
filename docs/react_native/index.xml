@@ -1,0 +1,92 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>react_native - Jan Meppe</title>
+    <link>https://www.janmeppe.com/notes/react_native/index.xml</link>
+    <description></description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Apr 2021 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://www.janmeppe.com/notes/react_native/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Image</title>
+      <link>https://www.janmeppe.com/notes/react_native/basics/image/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/react_native/basics/image/</guid>
+      <description>To show images in react native, use the Image component.
+Option 1: use require You can use require to load in an image. This can not be done dynamically. The link must be known at build time.
+&amp;lt;Image style={styles.tinyLogo} source={require(&amp;#39;@expo/snack-static/react-native-logo.png&amp;#39;)} /&amp;gt; Option 2: download from network You can use the uri parameter with a URL to download images from a network.
+Note that we pass in an object with a uri key.</description>
+    </item>
+    
+    <item>
+      <title>Persist AsyncStorage</title>
+      <link>https://www.janmeppe.com/notes/react_native/basics/asyncstorage/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/react_native/basics/asyncstorage/</guid>
+      <description>import AppLoading from &amp;#39;expo-app-loading&amp;#39;; import AsyncStorage from &amp;#39;@react-native-async-storage/async-storage&amp;#39;; import App from &amp;#39;./components/App&amp;#39;; export default function App(): { const [state, setState] = useState(null); const loadData = async () =&amp;gt; { const storedState = await AsyncStorage.getItem(&amp;#34;state&amp;#34;); setState(storedState); } useEffect(() =&amp;gt; { loadData(); }, []); if (!state) { return (&amp;lt;AppLoading /&amp;gt;); } return ( &amp;lt;App state={state} /&amp;gt; ); } </description>
+    </item>
+    
+    <item>
+      <title>Styling</title>
+      <link>https://www.janmeppe.com/notes/react_native/basics/styling/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/react_native/basics/styling/</guid>
+      <description>There are two ways of adding styling to a component:
+ Inline styles Stylesheets  Option 1: Inline Add the style inline. This is quick and dirty. I actually prefer to code this way and then refactor it later.
+import React from &amp;#34;react&amp;#34;; import { StyleSheet, Text, View } from &amp;#34;react-native&amp;#34;; const App = () =&amp;gt; ( &amp;lt;View style={{ flex: 1, padding: 24, backgroundColor: &amp;#34;#eaeaea&amp;#34; }}&amp;gt; &amp;lt;Text&amp;gt;React Native&amp;lt;/Text&amp;gt; &amp;lt;/View&amp;gt; ); Option 2: Stylesheets Create a StyleSheet object and put the styles in there.</description>
+    </item>
+    
+    <item>
+      <title>Text</title>
+      <link>https://www.janmeppe.com/notes/react_native/basics/text/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/react_native/basics/text/</guid>
+      <description>Another fundamental component in react native is the Text component.
+The Text component is a component for displaying text.
+The Text component supports nesting, styling, and touch handling.
+Read the official documentation by clicking here.
+Example import React, { useState } from &amp;#34;react&amp;#34;; import { Text, StyleSheet } from &amp;#34;react-native&amp;#34;; const TextInANest = () =&amp;gt; { const [titleText, setTitleText] = useState(&amp;#34;Bird&amp;#39;s Nest&amp;#34;); const bodyText = useState(&amp;#34;This is not really a bird nest.</description>
+    </item>
+    
+    <item>
+      <title>Think through your screens before starting</title>
+      <link>https://www.janmeppe.com/notes/react_native/meta/think_through_screen/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/react_native/meta/think_through_screen/</guid>
+      <description>One thing that has always helped me with my productivity by a lot is thinking the app completely through, especially the screens.
+When you are building an app take some time up front to think through what screens you need and make a quick sketch of that.
+Once you have that you have a nice grocery list to work from.</description>
+    </item>
+    
+    <item>
+      <title>View</title>
+      <link>https://www.janmeppe.com/notes/react_native/basics/view/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/react_native/basics/view/</guid>
+      <description>One of the most fundamental components in react native is the View component.
+Read the official documentation here.
+The View component is analogous to the div component. It can be thought of as a container. More specifically the View component is just a container that supports flexbox, styling, and some more things that are less important.
+Views are designed to be nested and that is exactly how you will build your react native application, by creating different views with other components inside.</description>
+    </item>
+    
+    <item>
+      <title>Work with a visual mockup</title>
+      <link>https://www.janmeppe.com/notes/react_native/meta/work_with_mockup/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.janmeppe.com/notes/react_native/meta/work_with_mockup/</guid>
+      <description>Another productivity tip is to work with a visual mockup.
+It is hard to do both design and coding work at the same time. So before you start take the time to create a visual mockup and then keep that fixed while you code it in. This has saved me many hours already. If you try to design and code at the same time you&amp;rsquo;re in for a lot of trouble.</description>
+    </item>
+    
+  </channel>
+</rss>
