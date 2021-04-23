@@ -12,6 +12,7 @@ draft: false
 ```python
 from sklearn import datasets
 import numpy as np
+import pandas as pd
 ```
 
 ## Load Iris Dataset
@@ -27,7 +28,22 @@ The dataset contains:
 ```python
 # Load Iris datset
 iris = datasets.load_iris()
+```
 
+
+```python
+dir(iris)
+```
+
+
+
+
+    ['DESCR', 'data', 'feature_names', 'filename', 'target', 'target_names']
+
+
+
+
+```python
 # Create features
 X = iris.data
 

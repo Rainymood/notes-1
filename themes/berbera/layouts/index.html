@@ -19,6 +19,61 @@
             </div>
         </div>
 
+        <div class="row" id="React Native">
+            <div class="col-sm-12">
+                <h3 class="category_header">React Native</h3>
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <h4 class="card-header">Meta</h4>
+                        <div class="card-body">
+                            <ul>
+                                {{ $pages := .Pages }}
+                                {{ if .IsHome }}
+                                    {{ $pages = .Site.RegularPages }}
+                                {{ end }}
+                                {{ range (where $pages "File.Dir" "in" "/react_native/meta/") }}
+                                <li>
+                                    <a href="{{.Permalink}}">{{.Title}}</a>
+                                </li>
+                                {{ end }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <h4 class="card-header">Basics</h4>
+                        <div class="card-body">
+                            <ul>
+                                {{ $pages := .Pages }}
+                                {{ if .IsHome }}
+                                    {{ $pages = .Site.RegularPages }}
+                                {{ end }}
+                                {{ range (where $pages "File.Dir" "in" "/react_native/basics/") }}
+                                <li>
+                                    <a href="{{.Permalink}}">{{.Title}}</a>
+                                </li>
+                                {{ end }}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-sm-12 blurb">
+                <p>Most of the Python snippets are straight up copied from <a href="https://www.chrisalbon.com">Chris Albon</a> so please pay his website a visit!</p>
+            </div>
+        </div>
+
         <div class="row" id="machine_learning">
             <div class="col-sm-12">
                 <h3 class="category_header">Machine Learning</h3>
@@ -425,35 +480,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row" id="data_science">
-            <div class="col-sm-12">
-                <h3 class="category_header">Data Science</h3>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <h4 class="card-header">Basics</h4>
-                    <div class="card-body">
-                        <ul>
-                            {{ $pages := .Pages }}
-                            {{ if .IsHome }}
-                                {{ $pages = .Site.RegularPages }}
-                            {{ end }}
-                            {{ range (where $pages "File.Dir" "in" "/data_science/basics/") }}
-                            <li>
-                                <a href="{{.Permalink}}">{{.Title}}</a>
-                            </li>
-                            {{ end }}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
 
         <div class="row" id="deep_learning">
             <div class="col-sm-12">

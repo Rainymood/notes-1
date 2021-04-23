@@ -19,3 +19,6 @@
 
 # DS_Store
 .DS_Store
+
+# Data folder
+/data

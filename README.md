@@ -63,6 +63,9 @@ alias nn='cd /Users/chrisalbon/dropbox/cra/projects/notes'
 # Go to Notes folder and open Jupyter Notebook
 alias njn='cd /Users/chrisalbon/dropbox/cra/projects/notes && jupyter notebook'
 
+# For me
+alias njn='cd ~/Documents/Projects/notes-1 && jupyter notebook'
+
 # Launch in Hugo server of Notes site
 alias nhs='cd /Users/chrisalbon/dropbox/cra/projects/notes && hugo server'
 
